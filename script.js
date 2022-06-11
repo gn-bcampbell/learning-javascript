@@ -39,3 +39,12 @@ if (money) {
     console.log("Get a job you schmuck") //returned as money converted to false
 }
 
+/*
+    S2 | EP22 : Equality Operators == vs. ===
+*/
+const age = 18;
+if (age === 18)
+    console.log('age is 18'); // returned 
+
+if (age == '18')
+    console.log('age is 18'); //returned because value is same even though type is different (type coercion)
