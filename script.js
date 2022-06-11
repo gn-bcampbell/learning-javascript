@@ -48,3 +48,18 @@ if (age === 18)
 
 if (age == '18')
     console.log('age is 18'); //returned because value is same even though type is different (type coercion)
+
+
+/*
+    S2 | EP23 & 24 : Logical Operators
+*/
+
+const hasDriversLicense = true;
+const hasGoodVision = true;
+
+console.log(hasDriversLicense && hasGoodVision); //true
+console.log(hasDriversLicense && !hasGoodVision); //false
+console.log(hasDriversLicense || !hasGoodVision); //true
+console.log(!hasDriversLicense || !hasGoodVision); //false
+
+
