@@ -63,7 +63,7 @@ console.log(hasDriversLicense || !hasGoodVision); //true
 console.log(!hasDriversLicense || !hasGoodVision); //false
 
 /*
-    S2 | EP26: Switch
+    S2 | EP26: Switch Statement
 */
 
 let value = 11;
@@ -79,3 +79,36 @@ switch (value) {
     default: console.log('unknown');
         break;
 }
+
+/*
+    S2 | EP27: Statements vs Expressions
+
+    Expression: Piece of code that produces a value 
+                Can be used in template literals
+                -> 3 + 4 
+                -> true && false
+    
+    Statements: Bigger piece of code that when executed doesn't produce a value by itself
+                -> const value = 10; (has a value but doesn't produce it)
+                -> If / else ''statement'' 
+*/
+
+
+/*
+    S2 | EP28: Ternary Condition
+
+    --> condition ? true : false
+    --> can be used inside template literal
+*/
+
+// simple if / else check
+const ternaryOp = 10;
+ternaryOp == 10 ? console.log('Value is 10') : console.log('Value is something else');
+
+// assignment
+const userAge = 18;
+let willDrink = userAge >= 18 ? "I'll have wine 🍷" : "Water 💧";
+console.log(willDrink); // outputs Wine 🍷
+
+// template literal
+console.log(`I like to drink ${userAge >= 18 ? "Wine 🍷" : "Water 💧"}`)
