@@ -62,4 +62,20 @@ console.log(hasDriversLicense && !hasGoodVision); //false
 console.log(hasDriversLicense || !hasGoodVision); //true
 console.log(!hasDriversLicense || !hasGoodVision); //false
 
+/*
+    S2 | EP26: Switch
+*/
 
+let value = 11;
+switch (value) {
+    case 10: console.log('value is 10');
+        break;
+
+    case 11:
+    case 12:
+        console.log('value either 11 or 12');
+        break;
+
+    default: console.log('unknown');
+        break;
+}
