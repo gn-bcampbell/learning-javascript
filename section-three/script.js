@@ -48,3 +48,31 @@ const calcAge2 = function (birthYear) {
 age2 = calcAge2(1992);
 console.log(age1, age2);
 
+/*
+    S3 | EP35: Arrow Functions
+
+    --> Great for one liners
+    --> Debateable if they're as useful for more complicated functions
+        --> Do not get 'this' keyword.
+*/
+
+// Simple: One line, one parameter returns implicitly without 'return' keyword
+const calcAge3 = birthYear => 2037 - birthYear;
+console.log(calcAge3(1992));
+
+// More than one line requires return keyword
+const yearsUntilRetirement = birthYear => {
+    const age = 2037 - birthYear;
+    return 65 - age;
+}
+console.log(yearsUntilRetirement(1993));
+
+// Multiple parameters requires paranthesis
+const personRetirement = (birthYear, firstName) => {
+    const age = 2037 - birthYear;
+    const retirement = 65 - age;
+    return `${firstName} retires in ${retirement} years`;
+}
+console.log(personRetirement(1993, 'Brendan'));
+console.log(personRetirement(1980, 'Bob'));
+
