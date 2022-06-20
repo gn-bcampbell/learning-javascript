@@ -76,3 +76,17 @@ const personRetirement = (birthYear, firstName) => {
 console.log(personRetirement(1993, 'Brendan'));
 console.log(personRetirement(1980, 'Bob'));
 
+/*
+    S3 | EP36: Functions Calling Other Functions
+*/
+function cutFruitPieces(fruit) {
+    return fruit * 4;
+}
+
+function processCutFruit(apples, oranges) {
+    applePieces = cutFruitPieces(apples);
+    orangePieces = cutFruitPieces(oranges);
+
+    return `Juice with ${applePieces} pieces of apple & ${orangePieces} pieces of orange.`;
+}
+console.log(processCutFruit(2, 3));
