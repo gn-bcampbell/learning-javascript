@@ -90,3 +90,35 @@ function processCutFruit(apples, oranges) {
     return `Juice with ${applePieces} pieces of apple & ${orangePieces} pieces of orange.`;
 }
 console.log(processCutFruit(2, 3));
+
+/*
+    S3 | EP37: Reviewing Functions
+*/
+const calcAge = function (birthYear) {
+    return 2037 - birthYear;
+}
+
+function yearsToRetire(birthYear, firstName) {
+    const age = calcAge(birthYear);
+    const retirement = 65 - age;
+
+    return retirement < 0 ? 0 : retirement;
+}
+console.log(yearsToRetire(1991, 'Brendan'));
+console.log(yearsToRetire(1970, 'Jacob'));
+
+// Recap
+
+// function declartion: can be used before it's declared
+function calc(year) {
+    return 2037 - year;
+}
+
+// function expression: essentially a function stored in a variable
+const age = function (year) {
+    return 2037 - year;
+}
+
+// arrow functions: great for one-liners & has no return statement
+const calulate = year => 2037 - year;
+const calulate2 = (year, name) => `${name} was born in ${2037 - year}`;
