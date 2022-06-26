@@ -122,3 +122,38 @@ const age = function (year) {
 // arrow functions: great for one-liners & has no return statement
 const calulate = year => 2037 - year;
 const calulate2 = (year, name) => `${name} was born in ${2037 - year}`;
+
+
+/*
+    S3 | EP39: Introduction to Arrays
+*/
+
+const friends = ['Michael', 'Steven', 'Peter'];
+console.log(friends);
+
+const numbers = new Array(1, 2, 3, 4, 5);
+console.log(numbers);
+
+console.log(friends[0]);
+console.log(friends.length); //property doesn't use ()
+console.log(friends[friends.length - 1]); //supports expression inside square brackets 
+friends[2] = 'Jay';
+console.log(friends[2]);
+
+const firstName = 'Brendan'
+const brendan = [firstName, 'Campbell', 2022 - 1993, 'Engineer', friends];
+console.log(brendan);
+
+// Exercise
+const calcAgeAgain = function (birthYear) {
+    return 2022 - birthYear;
+}
+
+const years = [1990, 1967, 2002, 2010, 2018];
+const arrayAge = calcAgeAgain(years[0]);
+const arrayAge1 = calcAgeAgain(years[1]);
+const arrayAge2 = calcAgeAgain(years[years.length - 1]);
+console.log(arrayAge, arrayAge1, arrayAge2);
+// Supports expressions as array values
+const allAges = [calcAgeAgain(years[0]), calcAgeAgain(years[1]), calcAgeAgain(years[years.length - 1])];
+console.log(allAges);
