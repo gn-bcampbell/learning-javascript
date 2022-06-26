@@ -127,7 +127,6 @@ const calulate2 = (year, name) => `${name} was born in ${2037 - year}`;
 /*
     S3 | EP39: Introduction to Arrays
 */
-
 const friends = ['Michael', 'Steven', 'Peter'];
 console.log(friends);
 
@@ -157,3 +156,36 @@ console.log(arrayAge, arrayAge1, arrayAge2);
 // Supports expressions as array values
 const allAges = [calcAgeAgain(years[0]), calcAgeAgain(years[1]), calcAgeAgain(years[years.length - 1])];
 console.log(allAges);
+
+/*
+    S3 | EP40: Basic Array Operations
+*/
+const mates = ['Michael', 'David', 'Blake'];
+
+// add element to end of array
+mates.push('Sara');
+console.log(mates);
+
+// add element to start of array
+mates.unshift('John');
+console.log(mates);
+
+// remove last element
+mates.pop();
+console.log(mates);
+// store removed element
+const removedValue = mates.pop();
+console.log(removedValue);
+
+// remove first element 
+mates.shift();
+console.log(mates);
+
+console.log(mates.indexOf('David')); //returns -1 if element doesn't exist
+
+// uses strict === equality
+console.log(mates.includes('David'));
+console.log(mates.includes('Jason'));
+
+if (mates.includes('David'))
+    console.log("You've a mate called David");
