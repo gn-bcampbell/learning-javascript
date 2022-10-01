@@ -236,3 +236,41 @@ console.log(jonas);
 // Challenge: "Jonas has 3 friends and his best friend is called Michael"
 const challengeSentence = `${jonas.firstName} has ${jonas.friends.length} friends and his best friend is called ${jonas.friends[0]}.`
 console.log(challengeSentence);
+
+/*
+    S3 | EP44: Object Methods
+
+    Can add functions to objects
+*/
+
+const brendanObject = {
+    firstName: 'Brendan',
+    lastName: 'Campbell',
+    birthYear: '1993',
+    job: 'Software Engineer',
+    friends: ['Bill', 'Bob', 'Tom',],
+    hasDriversLicence: true,
+
+    // any function attached to an object is a method (via js expression)
+    // basically a property that contains a 'function value'
+    calcAge: function(){
+        return 2037 - this.birthYear; // using this instead of brendanObject.birthyear is safer as the object name could change
+    },
+
+    // effecient alternative (calculate once and store as object property)
+    // better for more complex functional values
+    getAge: function() {
+        this.age = 2037 - this.birthYear;
+        return this.age;
+    },
+
+    getSummary: function(){
+        this.summary = `${this.firstName} is a ${this.getAge()} year old ${this.job} and he has ${this.hasDriversLicence ? 'a' : 'no'} drivers licence.`
+        return this.summary;
+    }
+}
+
+console.log(brendanObject.calcAge()); // no parameter required because it uses 'this' keyword [dependent on object calling the method, here it's brendanObject]
+console.log(brendanObject['calcAge'](1991));
+console.log(brendanObject.getAge()); 
+console.log(brendanObject.getSummary());
