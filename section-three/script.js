@@ -189,3 +189,19 @@ console.log(mates.includes('Jason'));
 
 if (mates.includes('David'))
     console.log("You've a mate called David");
+
+
+/*
+    S3 | EP41: Introduction to Objects
+*/
+
+// keys are 'properties' with values
+
+// example of object literal
+const jonas = {
+    firstName: 'Jonas',
+    lastName: 'Schmedtmann',
+    age: 2037-1991,
+    job: 'teacher',
+    friends: ['Michael', 'Peter', 'Steven']
+}
