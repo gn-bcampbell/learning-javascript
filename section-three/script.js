@@ -205,3 +205,34 @@ const jonas = {
     job: 'teacher',
     friends: ['Michael', 'Peter', 'Steven']
 }
+
+/*
+    S3 | EP41: Dot vs Bracket Notation
+
+    Access and change data in objects
+*/
+
+// Access
+console.log(jonas.lastName);
+console.log(jonas['lastName']);
+
+const nameKey = 'Name';
+console.log(jonas['first' + nameKey]) //bracket is a javascript expression (something that produces a value. In this case, it's a correct property name 'firstName')
+
+// example if we don't know what property we'll need to show (say via user interface)
+// const interestedIn = prompt('What do you want to know about Jonas? Choose between firstName, lastName, age, job or friends');
+
+// if (jonas[interestedIn])
+//     console.log(jonas[interestedIn]); //expression evaluates to property name
+// else
+//     console.log('Wrong request');
+
+// Change (add) properties to object
+jonas.location = 'Portugal';
+jonas['twitter'] = '@tweet-tweet';
+
+console.log(jonas);
+
+// Challenge: "Jonas has 3 friends and his best friend is called Michael"
+const challengeSentence = `${jonas.firstName} has ${jonas.friends.length} friends and his best friend is called ${jonas.friends[0]}.`
+console.log(challengeSentence);
