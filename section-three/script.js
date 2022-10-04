@@ -274,3 +274,12 @@ console.log(brendanObject.calcAge()); // no parameter required because it uses '
 console.log(brendanObject['calcAge'](1991));
 console.log(brendanObject.getAge()); 
 console.log(brendanObject.getSummary());
+
+
+/*
+    S3 | EP46: The For Loop
+*/
+
+for (let rep = 1; rep <= 10; rep++){
+    console.log(`Lifting weights, rep: ${rep} 🏋️‍♀️`);
+}
