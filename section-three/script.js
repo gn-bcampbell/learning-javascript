@@ -314,3 +314,20 @@ for (let i = 0; i < jonasArray.length; i++){
     if (typeof jonasArray[i] !== 'string') break; // log nothing more after a non string is found
     console.log(jonasArray[i], typeof jonasArray[i]);
 }
+
+
+/*
+    S3 | EP48: Looping backwards & Nested loops
+*/
+
+for (let i = jonasArray.length -1; i >= 0; i--){
+    console.log(`Index: ${i}`, jonasArray[i]);
+}
+
+for (let exercise = 1; exercise < 3; exercise++){
+    console.log(`---- Starting exercise: ${exercise}`);
+
+    for(let rep = 1; rep < 4; rep++) {
+        console.log(`Exercise: ${exercise}. Lifting weights, rep: ${rep} 🏋️‍♀️`);
+    }
+}
