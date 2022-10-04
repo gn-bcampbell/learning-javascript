@@ -283,3 +283,34 @@ console.log(brendanObject.getSummary());
 for (let rep = 1; rep <= 10; rep++){
     console.log(`Lifting weights, rep: ${rep} 🏋️‍♀️`);
 }
+
+/*
+    S3 | EP47: Looping arrays, breaking and continue
+*/
+const jonasArray = [
+    'Jonas',
+    'Schmedtmann',
+    2037-1991,
+    'teacher',
+    ['Michael', 'Peter', 'Steven']
+]
+
+let typeProperties = []
+
+for(let i = 0; i < jonasArray.length; i++){
+    console.log(jonasArray[i], typeof jonasArray[i]);
+    typeProperties.push(typeof jonasArray[i])
+}
+console.log(typeProperties);
+
+// continue --> exit current iteration of the loop and move onto next one
+for (let i = 0; i < jonasArray.length; i++){
+    if (typeof jonasArray[i] !== 'string') continue; //only continues loop if type is of string (stops iteration if any other type)
+    console.log(jonasArray[i], typeof jonasArray[i]);
+}
+
+// break --> exit loop altogether 
+for (let i = 0; i < jonasArray.length; i++){
+    if (typeof jonasArray[i] !== 'string') break; // log nothing more after a non string is found
+    console.log(jonasArray[i], typeof jonasArray[i]);
+}
