@@ -331,3 +331,17 @@ for (let exercise = 1; exercise < 3; exercise++){
         console.log(`Exercise: ${exercise}. Lifting weights, rep: ${rep} 🏋️‍♀️`);
     }
 }
+
+/*
+    S3 | EP49: The While Loop
+
+    Used instead of a for loop when you don't have or need a counter.
+*/
+
+let dice = Math.trunc(Math.random() * 6) + 1;
+
+while(dice !== 6){
+    console.log(`You rolled a ${dice}`);
+    dice = Math.trunc(Math.random() * 6) + 1;
+    if (dice === 6) console.log('Ending loop');
+}
