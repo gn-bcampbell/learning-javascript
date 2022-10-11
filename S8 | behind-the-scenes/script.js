@@ -123,3 +123,26 @@ const addArrow = (a, b) => {
 
 addArrow(2, 10);
 // addArrow(2, 10, 55, 34, 65); //! invalid
+
+/*
+    S8 | EP99: Primitive Types vs Reference Types in memory
+*/
+
+let age = 30;
+let oldAge = age;
+age = 31;
+console.log(age);
+console.log(oldAge);
+
+const me = {
+  name: "Brendan",
+  age: 30,
+};
+
+const friend = me;
+friend.age = 27;
+// both return 'Brendan 27' because objects are stored on the heap
+// when friend is created, a new identifier is added to the call stack
+// whose value is a pointer to the value on the heap (eg. me)
+console.log("Me: ", me);
+console.log("Friend: ", friend);
