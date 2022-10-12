@@ -1,7 +1,7 @@
 'use strict';
 
 /*
-    S9 | EP 103: Destructuring Arrays
+    ! S9 | EP 103: Destructuring Arrays
 
     Unpack values from array or object into separate variables
 */
@@ -59,7 +59,7 @@ const [p = 1, q = 1, r = 1] = [8, 9];
 console.log(p, q, r); // r returns 1 because of default value
 
 /*
-    S9 | EP 104: Destrucuring Objects
+    ! S9 | EP 104: Destrucuring Objects
 
     MVP: Object variables created must match the name of the object properties being destructured
 */
@@ -105,6 +105,11 @@ const restaurantWithHours = {
     console.log(
       `Here is your pasta, made with: ${ing1}, ${ing2}, and ${ing3}.`
     );
+  },
+  // requires 1 ingredient, but others are optional
+  orderPizza: function (mainIngredient, ...otherIngredients) {
+    console.log(mainIngredient);
+    console.log(otherIngredients);
   },
 };
 
@@ -165,11 +170,13 @@ const {
 console.log(o, c);
 
 /*
-    S9 | EP 105: Spread Operator
+    ! S9 | EP 105: Spread Operator
 
     Unpacking / Expand array into all of its individual elements 
 
     Works on all 'iterables': arrays, strings, maps, sets (not objects)
+
+    Spread ... operator is on the RIGHT side of = assignment operator
 */
 
 const arr1 = [7, 8, 9];
@@ -228,3 +235,58 @@ console.log(newRestaurant);
 const restaurantCopy = { ...restaurantWithHours };
 restaurantCopy.name = 'Ristorante Copy';
 console.log(restaurantWithHours.name, restaurantCopy.name); //different because they are separate objects
+
+/*
+    ! S9 | EP 106: Rest Pattern and Parameters
+
+    Packs elements into an array (using ... operator on LEFT side of =)
+    Takes the 'rest' of the items and packs them into an array
+
+    SPREAD: Unpacks on right
+    REST: Packs on left
+*/
+
+// -- Destructuring --
+
+// SPREAD, because it's on RIGHT side of =
+const arrSpread = [1, 2, ...[3, 4, 5]];
+// REST, because on LEFT side of =
+const [one, two, ...others] = [1, 2, 3, 4, 5];
+
+console.log(arrSpread); // returns 1,2,3,4,5
+console.log(one, two, others); //returns 1,2 [3,4,5]
+
+// Get the pizza, skip the pasta, get the risotto & pack everything else into otherFood
+
+// Arrays
+const [pizza, , risotto, ...otherFood] = [
+  ...restaurantWithHours.mainMenu,
+  ...restaurantWithHours.starterMenu,
+];
+
+console.log(pizza, risotto, otherFood);
+
+// Objects
+// Get only Saturday and other days go into 'Weekdays' (objects don't need to be in order so this works)
+const { sat, ...weekdays } = openingHours;
+console.log(sat, weekdays);
+
+// -- Functions --
+
+//take arbitrary amount of numbers and add them all together
+const add = function (...numbers) {
+  let x = 0;
+  for (let i = 0; i < numbers.length; i++) {
+    x += numbers[i];
+  }
+  console.log(x);
+};
+add(1, 2, 3, 4);
+add(1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+const temp = [23, 5, 7];
+add(...temp);
+
+// Using rest arguments in a function
+restaurantWithHours.orderPizza('mushrooms', 'onion', 'olives', 'spinach');
+restaurantWithHours.orderPizza('mushrooms');
