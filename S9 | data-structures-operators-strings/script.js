@@ -290,3 +290,34 @@ add(...temp);
 // Using rest arguments in a function
 restaurantWithHours.orderPizza('mushrooms', 'onion', 'olives', 'spinach');
 restaurantWithHours.orderPizza('mushrooms');
+
+/*
+    ! S9 | EP 109: Logical Assignment Operators
+
+    OR Assignment Operator  ||=
+    Nullish Assignment Operator ??= (null or undefined)
+    AND Assignment Operator &&=
+*/
+
+const rest1 = {
+  name: 'Capri',
+  numOfGuests: 20,
+};
+
+const rest2 = {
+  name: 'La Piazza',
+  owner: 'Giovanni',
+};
+
+// OR assignment operator
+// rest1.numOfGuests = rest1.numOfGuests || 10;
+// rest2.numOfGuests = rest2.numOfGuests || 10;
+rest1.numOfGuests ||= 10; // assign 10 if current value is falsey
+rest2.numOfGuests ||= 10;
+
+rest1.numOfGuests ??= 10; //assign 10 if null or undefined
+
+// rest2.owner = rest2.owner && '<ANONYMOUS>';
+rest2.owner &&= '<ANONYMOUS>'; // assign anonymous if current value is truthy
+
+console.log(rest1, rest2);
