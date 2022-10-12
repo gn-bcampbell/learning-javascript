@@ -60,6 +60,8 @@ console.log(p, q, r); // r returns 1 because of default value
 
 /*
     S9 | EP 104: Destrucuring Objects
+
+    MVP: Object variables created must match the name of the object properties being destructured
 */
 console.log(`---- Destructuring Objects ----`);
 
@@ -97,6 +99,11 @@ const restaurantWithHours = {
       Main: ${this.mainMenu[mainIndex]}. 
       Time: ${time}. 
       Delivery Location: ${address} `
+    );
+  },
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(
+      `Here is your pasta, made with: ${ing1}, ${ing2}, and ${ing3}.`
     );
   },
 };
@@ -156,3 +163,68 @@ const {
   fri: { open: o, close: c }, //exact name of object properties
 } = openingHours2;
 console.log(o, c);
+
+/*
+    S9 | EP 105: Spread Operator
+
+    Unpacking / Expand array into all of its individual elements 
+
+    Works on all 'iterables': arrays, strings, maps, sets (not objects)
+*/
+
+const arr1 = [7, 8, 9];
+const badArray = [7, 8, 9, arr[0], arr[1], arr[2]]; //equivalent to spread operator
+const arr2 = [1, 2, ...arr1];
+console.log(arr2); //returns [1, 2, 7, 8, 9]
+console.log(...arr2); //returns 1 2 7 8 9
+
+const newMenuStart = ['Add to start', ...restaurantWithHours.mainMenu];
+const newMenuEnd = [...restaurantWithHours.mainMenu, 'Add to end'];
+console.log(newMenuStart);
+console.log(newMenuEnd);
+
+/*
+    Spread operator is similar to destructuring 
+    however, it does not create new variables
+    so we can only use it in places where we'd otherwise 
+    write values separated by commas.
+*/
+
+// Copy Array (Note the [] brackets are neccessary)
+const mainMenuCopy = [...restaurantWithHours.mainMenu];
+
+// Join two arrays or more together
+const joinedMenus = [
+  ...restaurantWithHours.starterMenu,
+  ...restaurantWithHours.mainMenu,
+];
+console.log(joinedMenus);
+
+const username = 'Brendan';
+const letters = [...username, ' ', 'C.'];
+console.log(...letters);
+console.log('Name: ', ...letters);
+
+// Build function that accepts multiple args, and use ... spread op to pass those arguments
+const ingredients = [
+  //   prompt("Let's make pasta. Ingredient 1"),
+  //   prompt("Let's make pasta. Ingredient 2"),
+  //   prompt("Let's make pasta. Ingredient 3"),
+];
+restaurantWithHours.orderPasta(...ingredients);
+restaurantWithHours.orderPasta(ingredients[0], ingredients[1], ingredients[2]);
+
+// Objects (since 2018)
+// Create a new object with all the data from original, plus additional data
+// Creates a shallow copy
+const newRestaurant = {
+  foundingYear: 1993,
+  ...restaurantWithHours,
+  founder: 'Guiseppe',
+};
+console.log(newRestaurant);
+
+// Creates a shallow copy of the object
+const restaurantCopy = { ...restaurantWithHours };
+restaurantCopy.name = 'Ristorante Copy';
+console.log(restaurantWithHours.name, restaurantCopy.name); //different because they are separate objects
