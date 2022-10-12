@@ -146,3 +146,26 @@ friend.age = 27;
 // whose value is a pointer to the value on the heap (eg. me)
 console.log("Me: ", me);
 console.log("Friend: ", friend);
+
+/*
+    S8 | EP99 : Primitives vs Objects in Practice
+*/
+
+// Properly copy an object and add it to the Heap (like the first object)
+const jessica = {
+  firstName: "Jessica",
+  lastName: "Davis",
+  age: 27,
+  family: ["Brian", "David", "Sara"],
+};
+
+const callStackJessica = jessica;
+
+const jessicaHeap = Object.assign({}, jessica); // creates a new object with same properties
+
+// now changing the 'copied' version does not affect the original object
+jessicaHeap.age = 30;
+// does not change because this is a shallow copy
+jessicaHeap.family[0] = "Brendan";
+
+console.log(jessica, jessicaHeap);
