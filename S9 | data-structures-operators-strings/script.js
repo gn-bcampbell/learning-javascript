@@ -345,3 +345,49 @@ for (const item of menu.entries()) {
 for (const [index, element] of menu.entries()) {
   console.log(`${index + 1}: ${element}`);
 }
+
+/*
+    ! S9 | EP 112: Enhanced Object Literals
+*/
+
+// using an external object inside another
+const hoursObject = {
+  fri: {
+    open: '9am - 10pm',
+  },
+  sat: {
+    open: '9am - 12pm',
+  },
+};
+
+const tempObject = {
+  name: 'salon',
+  // hoursObject: hoursObject, SAME AS BELOW
+  hoursObject,
+};
+
+// writing methods, doesn't need function keyword or colon
+const anotherTempObject = {
+  name: 'Thai Restaraunt',
+  location: 'Belfast',
+
+  getAddress(name, location) {
+    return `${this.name} is located in ${this.location}`;
+  },
+};
+console.log(anotherTempObject.getAddress());
+
+// can compute property names instead of writing them literally
+const tempWeekdays = ['mon', 'tue', 'wed', 'thurs', 'fri', 'sat', 'sun'];
+const hoursObjectProp = {
+  [tempWeekdays[4]]: {
+    open: '9am - 10pm',
+  },
+  sat: {
+    open: '9am - 12pm',
+  },
+  [`day-${tempWeekdays.length - 1}`]: {
+    open: 'closed',
+  },
+};
+console.log(hoursObjectProp);
