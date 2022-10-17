@@ -403,3 +403,21 @@ for (const key of Object.keys(menu)) {
 for (const key of menu.keys()) {
   console.log(key);
 }
+
+/*
+    ! S9 | EP 116: Sets
+
+    ! Ordered, unique - NOT used for retrieval ONLY used to see if a set HAS a value
+*/
+
+const newSet = new Set(['Pizza', 'Pizza', 'Rissoto', 'Garlic Bread']);
+console.log(newSet);
+
+const hasPizza = newSet.has('Pizza'); //true
+newSet.size;
+newSet.add('Garlic Bread'); // won't add because it's already there
+newSet.delete('Garlic Bread'); // will delete value
+// newSet.clear(); //removes all values from Set
+
+// Use case -> remove duplicate values & create an array using ...
+const stuff = new Set([...newSet]);
