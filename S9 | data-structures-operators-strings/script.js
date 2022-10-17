@@ -421,3 +421,46 @@ newSet.delete('Garlic Bread'); // will delete value
 
 // Use case -> remove duplicate values & create an array using ...
 const stuff = new Set([...newSet]);
+
+/*
+    ! S9 | EP 117: Map
+
+    ! Map values to keys, keys can have any types unlike an object
+*/
+
+const rest = new Map();
+
+rest.set('name', 'Classico Italiano'); // add new key and element
+rest.set(1, 'Firenze, Italy');
+rest.set(2, 'Lisbon, Portugal'); // calling set will update and return in same line meaning you can chain
+
+rest
+  .set('categories', ['Italian', 'Pizzeria'])
+  .set('open', 11)
+  .set('close', 23)
+  .set(true, 'We are open')
+  .set(false, 'We are closed');
+
+//Get values
+console.log(rest.get('name')); // classico italiano
+console.log(rest.get(true)); // we are open
+
+// Evaluate logic to get key
+// result will be true or false & will return 'open' or 'close' value
+// because it evaluates to rest.get(true) -> 'We are open'
+const time = 21;
+rest.get(time > rest.get('open') && time < rest.get('close'));
+
+rest.has('categories'); //true
+rest.delete(2); //deletes 'Firenze Italy'
+rest.size;
+// rest.clear(); // clears entire map
+console.log(rest);
+
+// use array or methods as map key
+const arr3 = [1, 2];
+rest.set(arr3, 'Workign');
+console.log(rest.get(arr3)); //works as expected
+
+rest.set([1, 2], 'Not working');
+console.log(rest.get([1, 2])); //fails because the arrays are two different objects on the heap
