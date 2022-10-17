@@ -423,7 +423,7 @@ newSet.delete('Garlic Bread'); // will delete value
 const stuff = new Set([...newSet]);
 
 /*
-    ! S9 | EP 117: Map
+    ! S9 | EP 117: Maps - Fundamentals
 
     ! Map values to keys, keys can have any types unlike an object
 */
@@ -464,3 +464,37 @@ console.log(rest.get(arr3)); //works as expected
 
 rest.set([1, 2], 'Not working');
 console.log(rest.get([1, 2])); //fails because the arrays are two different objects on the heap
+
+/*
+    ! S9 | EP 118: Maps - Iteration
+*/
+
+// quicker initialisation vs .set chaining
+const question = new Map([
+  ['question', 'What is the best programming language?'],
+  [1, 'C#'],
+  [2, 'Java'],
+  [3, 'JavaScript'],
+  ['correct', 3],
+  [true, 'Correct 🎉'],
+  [false, 'Try Again!'],
+]);
+console.log(question);
+
+// Convert from objects to Maps
+Object.entries(hours); // returns an array of arrays (same as 'question' map above)
+const hoursMap = new Map(Object.entries(hours));
+console.log(hoursMap);
+
+// Iteration
+console.log(question.get('question'));
+
+for (const [key, value] of question) {
+  if (typeof key === 'number') console.log(`Answer ${key}: ${value}`); //only get options via key
+}
+
+const answer = Number(prompt('Your answer: '));
+console.log(question.get(answer === question.get('correct')));
+
+//Convert map to an array
+console.log([...question]);
