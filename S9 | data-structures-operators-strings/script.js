@@ -314,10 +314,34 @@ const rest2 = {
 // rest2.numOfGuests = rest2.numOfGuests || 10;
 rest1.numOfGuests ||= 10; // assign 10 if current value is falsey
 rest2.numOfGuests ||= 10;
-
 rest1.numOfGuests ??= 10; //assign 10 if null or undefined
 
 // rest2.owner = rest2.owner && '<ANONYMOUS>';
 rest2.owner &&= '<ANONYMOUS>'; // assign anonymous if current value is truthy
-
 console.log(rest1, rest2);
+
+/*
+    ! S9 | EP 111: Looping Arrays: The for-of Loop
+*/
+console.log('---- EP 111 ----');
+
+const menu = [
+  ...restaurantWithHours.starterMenu,
+  ...restaurantWithHours.mainMenu,
+];
+
+for (const item of menu) {
+  console.log(item);
+}
+
+// return array of index and item
+for (const item of menu.entries()) {
+  // console.log(item);
+  // console.log(menu.entries());
+  console.log(`${item[0] + 1}: ${item[1]}`);
+}
+
+// for with destructuring
+for (const [index, element] of menu.entries()) {
+  console.log(`${index + 1}: ${element}`);
+}
