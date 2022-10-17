@@ -391,3 +391,15 @@ const hoursObjectProp = {
   },
 };
 console.log(hoursObjectProp);
+
+/*
+    ! S9 | EP 114: Looping Objects: Keys, Values and Entries
+*/
+
+for (const key of Object.keys(menu)) {
+  console.log(key);
+}
+
+for (const key of menu.keys()) {
+  console.log(key);
+}
