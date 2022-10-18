@@ -493,8 +493,41 @@ for (const [key, value] of question) {
   if (typeof key === 'number') console.log(`Answer ${key}: ${value}`); //only get options via key
 }
 
-const answer = Number(prompt('Your answer: '));
+const answer = 'delete me'; //Number(prompt('Your answer: '));
 console.log(question.get(answer === question.get('correct')));
 
 //Convert map to an array
 console.log([...question]);
+
+/*
+    ! S9 | EP 121: Working with Strings - Part 1
+
+    ! JS uses 'boxing' to 'WRAP' a primitive value in an object (its corresponding object type)
+    ! so it can be treated as an object
+*/
+
+const airline = 'TAP Air Portugal';
+const plane = 'A320';
+
+console.log(plane[0]);
+console.log(plane.slice(0, 1));
+console.log(plane.slice(-2)); //start from the end
+
+console.log(airline.indexOf('A')); //returns first index found
+console.log(airline.lastIndexOf('r'));
+
+console.log(airline.slice(3, airline.lastIndexOf('r'))); //combine
+
+const stringTemp = [...plane]; //convert to array
+console.log(stringTemp);
+
+const checkMiddleSeat = function (seat) {
+  //B and E are middle seats
+  const letter = seat.slice(-1);
+  if (letter === 'B' || letter === 'E') console.log('middle seat');
+  else console.log('corner seat');
+};
+
+checkMiddleSeat('11B');
+checkMiddleSeat('11D');
+checkMiddleSeat('1E');
