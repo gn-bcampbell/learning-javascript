@@ -518,9 +518,6 @@ console.log(airline.lastIndexOf('r'));
 
 console.log(airline.slice(3, airline.lastIndexOf('r'))); //combine
 
-const stringTemp = [...plane]; //convert to array
-console.log(stringTemp);
-
 const checkMiddleSeat = function (seat) {
   //B and E are middle seats
   const letter = seat.slice(-1);
@@ -531,3 +528,27 @@ const checkMiddleSeat = function (seat) {
 checkMiddleSeat('11B');
 checkMiddleSeat('11D');
 checkMiddleSeat('1E');
+
+/*
+    ! S9 | EP 122: Working with Strings - Part 2
+*/
+console.log('a+very+nice+evening+today'.split('+'));
+console.log('Brendan Campbell'.split(' '));
+
+const firstWord = 'firstWord';
+const secondWord = 'secondWord';
+console.log([firstWord, secondWord].join(' '));
+
+// capitalise first letter of each word
+const capitaliseName = function (name) {
+  const names = name.split(' ');
+  const uppercaseNames = [];
+
+  for (const n of names) {
+    uppercaseNames.push(n[0].toUpperCase() + n.slice(1));
+  }
+  console.log(uppercaseNames.join(' '));
+};
+
+capitaliseName('brendan campbell');
+capitaliseName('lisa smith mark davies');
