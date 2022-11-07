@@ -46,3 +46,22 @@ const checkIn = function (flightNum, passenger) {
 checkIn(flight, jonas);
 console.log(flight); // remains LH123
 console.log(jonas); // updates to Mr. Jonas Schmet
+
+/*
+    ! S10 | EP 130: First Class and Higher Order Functions
+
+    ! JS treats functions as first-class citizens
+    ! Functions are simply values (all functions are objects so functions are also values)
+
+    ! Higher Order-Function: A function that receives another function as an argument, that returns a new function (or both)
+*/
+const addEx = (a, b) => a + b; //storing functions in variables
+const counterEx = {
+  value: 23,
+  inc: function () {
+    this.value;
+  }, //storing functions in properties
+};
+btnClose.addEventlistener('click', counterEx); //pass functions are arguments in other functions
+
+counterEx.inc.bind(someOtherObject); // return functions from functions or call methods on functions
