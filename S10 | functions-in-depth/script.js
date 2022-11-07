@@ -105,3 +105,24 @@ document.body.addEventListener('click', high5); //eventListener is higher order 
 
 // another
 ['Jonas', 'Martha', 'Adam'].forEach(high5); //foreach item in array call back to function high5
+
+/*
+    ! S10 | EP 132: Create a function that returns a new function
+*/
+
+const greet = function (greeting) {
+  return function (name) {
+    console.log(`${greeting} ${name}`);
+  };
+};
+
+/* Greet returns a new function that we stored in greeterHey which is now just a function
+that we can pass a parameter name into */
+const greeterHey = greet('Hey');
+greeterHey('Brendan');
+greeterHey('Kaya');
+greet('Hi')('Brendan'); //immediately call the function -> () after the function name
+
+// one arrow function returning another arrow function
+const greetArrow = greeting => name => console.log(`${greeting}, ${name}`);
+greetArrow('Hi there')('Brendan');
