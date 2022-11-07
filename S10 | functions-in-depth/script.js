@@ -126,3 +126,55 @@ greet('Hi')('Brendan'); //immediately call the function -> () after the function
 // one arrow function returning another arrow function
 const greetArrow = greeting => name => console.log(`${greeting}, ${name}`);
 greetArrow('Hi there')('Brendan');
+
+/*
+    ! S10 | EP 133: The Call and Apply methods
+
+    ! Call: Accepts the object you want to substitute out, then other parameters are the method parameters needed for the function called
+    ! Apply [deprecated]: Exact same, except it takes an array for the necessary parameters
+*/
+
+const lufthansa = {
+  airline: 'Lufthansa',
+  iata: 'LH',
+  bookings: [],
+  book(flightNum, name) {
+    console.log(
+      `${name} booked a seat on  ${this.airline} flight: ${this.iata}:${flightNum}`
+    );
+    this.bookings.push({ flight: `${this.iata}${flightNum}`, name });
+  },
+};
+
+lufthansa.book(239, 'Brendan');
+lufthansa.book(255, 'Kaya');
+console.log(lufthansa.bookings);
+
+const euroWings = {
+  airline: 'EuroWings',
+  iata: 'EW',
+  bookings: [],
+};
+
+const book = lufthansa.book;
+
+/* Calls a method of an object, substituting another object for the current object.
+    @param thisArg — The object to be used as the current object.
+    @param argArray — A list of arguments to be passed to the method. */
+book.call(euroWings, 23, 'Sara');
+book.call(lufthansa, 444, 'Mary');
+
+const swiss = {
+  airline: 'Swiss Air Lines',
+  iata: 'SW',
+  bookings: [],
+};
+book.call(swiss, 55, 'Jason');
+
+// Apply [deprecated]
+const flightData = [55, 'Brendan'];
+book.apply(swiss, [22, 'Jackson']);
+book.apply(lufthansa, flightData);
+
+// preferred method using spread operator
+book.call(euroWings, ...flightData);
