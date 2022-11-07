@@ -101,7 +101,7 @@ transformer('Javascript is the best!', oneWord); // * callback function
 const high5 = function () {
   console.log('✋');
 };
-document.body.addEventListener('click', high5); //eventListener is higher order function, and high5 is callback function
+// document.body.addEventListener('click', high5); //* eventListener is higher order function, and high5 is callback function
 
 // another
 ['Jonas', 'Martha', 'Adam'].forEach(high5); //foreach item in array call back to function high5
@@ -140,7 +140,7 @@ const lufthansa = {
   bookings: [],
   book(flightNum, name) {
     console.log(
-      `${name} booked a seat on  ${this.airline} flight: ${this.iata}:${flightNum}`
+      `${name} booked a seat on ${this.airline} flight: ${this.iata}:${flightNum}`
     );
     this.bookings.push({ flight: `${this.iata}${flightNum}`, name });
   },
@@ -178,3 +178,60 @@ book.apply(lufthansa, flightData);
 
 // preferred method using spread operator
 book.call(euroWings, ...flightData);
+
+/*
+    ! S10 | EP 134: Bind Method
+
+    ! Same as call (lets you set 'this' keyword)
+    ! Difference is: bind doesn't immediately call the function, instead it returns a new function where the 'this' keyword is bound
+
+    Useful if you have to use that function multiple times
+*/
+
+const bookEW = book.bind(euroWings); // returns a new function where 'this' keyword is always bound to euroWings object
+bookEW(3321, 'Brian');
+bookEW(3321, 'Steven');
+
+console.log(euroWings.bookings);
+
+const bookSW = book.bind(swiss);
+bookSW(564, 'Mr Swiss');
+bookSW(564, 'Mrs Swiss');
+
+// create variable where all flights are euroWings 23 flights
+const bookEW23 = book.bind(euroWings, 23);
+bookEW23('Lionel'); // only needs one param
+
+// Using objects together with event listeners
+lufthansa.planes = 300;
+lufthansa.buyPlane = function () {
+  console.log(this);
+  this.planes++;
+  console.log(this.planes);
+};
+
+document
+  .querySelector('.buy')
+  .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+// .addEventListener('click', lufthansa.buyPlane); // ! 'this' scopes to the handler function and .button element & not lufthansa object
+
+// ! Partial Application lets you preset parameters
+const addTax = (rate, value) => value + value * rate;
+console.log(addTax(0.1, 200));
+
+const addVAT = addTax.bind(null, 0.23);
+// same as -> addVAT = value=> value + value * 0.23;
+
+console.log(addVAT(100));
+console.log(addVAT(200));
+
+/* Challenge: Create a function that can return a function which does the same as addVAT */
+const addTaxRate = function (rate) {
+  return function (value) {
+    return value + value * rate;
+  };
+};
+
+const addVAT2 = addTaxRate(0.23);
+console.log(addVAT(100));
+console.log(addVAT(200));
