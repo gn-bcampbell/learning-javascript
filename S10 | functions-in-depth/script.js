@@ -252,3 +252,30 @@ console.log(addVAT(200));
 })();
 
 (() => console.log('IIF arrow'))();
+
+/*
+    ! S10 | EP 137: Closures
+
+    Any function always has access to the variable environment of the execution context in which the function was created
+
+    Booker function will get access to the variable environment which contains the 'passengerCount' variable
+    And this is how the function can read and manipulate that variable even after the execution context (secureBooking function) is completed
+    
+    CLOSEURE = The variable environment that's attached to the function exactly as it was at the time and place the function was created
+
+    MVP - Just go back to the video
+*/
+
+const secureBooking = function () {
+  let passengerCount = 0;
+
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  };
+};
+
+const booker = secureBooking();
+booker();
+booker();
+booker();
