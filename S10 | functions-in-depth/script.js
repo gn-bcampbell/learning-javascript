@@ -235,3 +235,20 @@ const addTaxRate = function (rate) {
 const addVAT2 = addTaxRate(0.23);
 console.log(addVAT(100));
 console.log(addVAT(200));
+
+/*
+    ! S10 | EP 136: Immediately Invoked Functions IIF
+
+    Invoked and then disappears immediately after (used in async/await)
+    Used for encapsulation to ensure variables are only accessible inside that scope [deprecated in ES6 due to blocks {variables in here are scoped}]
+
+    1. Write a function with no name, 
+    2. Wrap it in () to make it an expression,
+    3. Immediately call it using ()
+*/
+
+(function () {
+  console.log('IIF standard');
+})();
+
+(() => console.log('IIF arrow'))();
