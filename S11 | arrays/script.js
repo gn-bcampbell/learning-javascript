@@ -53,6 +53,43 @@ console.log(arr3[arr3.length - 1]); //old
 console.log(arr3.slice(-1)[0]); //old
 console.log(arr3.at(-1));
 
+/*
+    ! S11 | EP 144: forEach method
+
+    loop over array and execute callback function, passing in current element of array
+    movements.forEach((movement, index, array) => {});
+
+    You CANNOT break out of forEach (break; continue;)
+
+*/
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+console.log('----For Of----');
+for (const [i, movement] of movements.entries()) {
+  if (movement > 0) console.log(`At index ${i + 1}: You deposited ${movement}`);
+  else console.log(`You withdrew ${Math.abs(movement)}`);
+}
+
+console.log('----forEach----');
+// loop over array and execute callback function, passing in current element of array
+// 0: function(200)
+// 1: function(450)
+movements.forEach(function (movement) {
+  if (movement > 0) console.log(`You deposited ${movement}`);
+  else console.log(`You withdrew ${Math.abs(movement)}`);
+});
+
+console.log('----forEach arrow function with index ----');
+// passes current element, index and entire array [order matters]
+movements.forEach((movement, index, array) => {
+  if (movement > 0)
+    console.log(
+      `At index ${index + 1}: You deposited ${movement} from array: ${array}`
+    );
+  else console.log(`At index ${index + 1}: You withdrew ${Math.abs(movement)}`);
+});
+
 // BANKIST APP
 
 // Data
@@ -121,7 +158,5 @@ const currencies = new Map([
   ['EUR', 'Euro'],
   ['GBP', 'Pound sterling'],
 ]);
-
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
