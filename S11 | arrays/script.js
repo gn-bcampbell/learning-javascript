@@ -40,6 +40,19 @@ console.log([...arr, ...arr2]);
 // JOIN
 console.log(arr.join(' - ')); //a-b-c-d-e
 
+/*
+    ! S11 | EP 143: .at Method
+*/
+
+const arr3 = [23, 11, 64];
+console.log(arr3[0]);
+console.log(arr3.at(0));
+
+//get value from end of array
+console.log(arr3[arr3.length - 1]); //old
+console.log(arr3.slice(-1)[0]); //old
+console.log(arr3.at(-1));
+
 // BANKIST APP
 
 // Data
