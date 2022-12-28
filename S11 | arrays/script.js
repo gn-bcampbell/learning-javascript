@@ -173,3 +173,26 @@ const inputTransferAmount = document.querySelector('.form__input--amount');
 const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
+
+const displayMovements = function (movements) {
+  containerMovements.innerHTML = ''; // remove test data before adding
+
+  //loop over all movements and create html elements containing data
+  movements.forEach((movement, index) => {
+    let transactionDirection = movement < 0 ? 'withdrawal' : 'deposit';
+    const html = `        
+    <div class="movements__row">
+        <div class="movements__type movements__type--${transactionDirection}">${
+      index + 1
+    } ${transactionDirection}</div>
+        <div class="movements__date">3 days ago</div>
+        <div class="movements__value">${movement} €</div>
+  </div>
+  `;
+
+    containerMovements.insertAdjacentHTML('beforeend', html); //add html above into element
+  });
+};
+
+displayMovements(account1.movements);
+console.log(username);
