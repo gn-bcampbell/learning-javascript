@@ -90,6 +90,31 @@ movements.forEach((movement, index, array) => {
   else console.log(`At index ${index + 1}: You withdrew ${Math.abs(movement)}`);
 });
 
+/*
+    ! S11 | EP 145: forEach on Maps and Sets
+
+    Maps - value, key, map
+    Sets - uses same parameters even though sets don't have indexes or keys
+*/
+
+// array of arrays
+const currencies = new Map([
+  ['USD', 'United States dollar'],
+  ['EUR', 'Euro'],
+  ['GBP', 'Pound sterling'],
+]);
+
+currencies.forEach((value, key, map) => {
+  console.log(`this is the value ${value}. This is the key ${key}`);
+});
+
+const currenciesUnique = new Set(['USD', 'EUR', 'EUR']);
+console.log(currenciesUnique); // only shows unique values
+
+currenciesUnique.forEach((value, _, set) => {
+  console.log(`${value}`);
+});
+
 // BANKIST APP
 
 // Data
@@ -148,15 +173,3 @@ const inputTransferAmount = document.querySelector('.form__input--amount');
 const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
-
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-// LECTURES
-
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
-
-/////////////////////////////////////////////////
