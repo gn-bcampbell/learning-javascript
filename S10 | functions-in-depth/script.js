@@ -279,3 +279,18 @@ const booker = secureBooking();
 booker();
 booker();
 booker();
+
+/*
+    ! S10 | EP 138: Closure Examples
+*/
+
+let f;
+
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a * 2);
+  };
+};
+g();
+f();
