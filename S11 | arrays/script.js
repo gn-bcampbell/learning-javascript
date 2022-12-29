@@ -115,6 +115,21 @@ currenciesUnique.forEach((value, _, set) => {
   console.log(`${value}`);
 });
 
+/*
+    ! S11 | EP 149: Data transformation. Map, Filter, Reduce
+
+    Map: Similar to forEach. It creates brand new array based on original array. Applies callback function on each iteration. 
+         'Maps values of original array to the new array'. Builds a new array that is the result of applying an operation to the original array. Ie, 
+         ? array1.map(x => x * 2);
+
+    Filter: Used to filter for elements in original array that satisfy a certain condition. Only elements that pass condition will be included in new array
+            ? words.filter(w => w.length > 6); 
+            Creates a new array that only contains words > 6 characters
+
+    Reduce: Boil down all elements of original array into one single value. Ie, add all elements together. Contains 'accumulator' variable 
+           ? const sumWithInitial = array1.reduce((accumulator, currentValue) => accumulator + currentValue);
+*/
+
 // BANKIST APP
 
 // Data
