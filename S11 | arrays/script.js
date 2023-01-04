@@ -244,6 +244,39 @@ console.log(deposits);
 const withdrawals = movements.filter(x => x < 0);
 console.log(withdrawals);
 
+/*
+    ! S11 | EP 153: Reduce:
+    ? Boil down all values in an array into a single value
+*/
+
+// set initial value in params
+const totalBalance = movements.reduce(
+  (accumulator = 0, current, index, array) => {
+    return accumulator + current;
+  }
+);
+
+// set initial value after declaration
+const totalBalance2 = movements.reduce(
+  (accumulator, current, index, array) => accumulator + current,
+  0
+);
+console.log(totalBalance, totalBalance2);
+
+const maxValue = movements.reduce((accumulator = 0, current) => {
+  let currentMax = accumulator;
+  if (current > currentMax) currentMax = current;
+
+  return currentMax;
+});
+
+const maxValue2 = movements.reduce((accumulator, current) => {
+  if (accumulator > current) return accumulator;
+  else return current;
+}, movements[0]); // start with initial value from array instead of 0
+
+console.log(maxValue, maxValue2);
+
 const displayMovements = function (movements) {
   containerMovements.innerHTML = ''; // remove test data before adding
 
@@ -265,3 +298,12 @@ const displayMovements = function (movements) {
 };
 
 displayMovements(account1.movements);
+
+// calc and disply balance
+const calcDispalyBalance = function (movements) {
+  const balance = movements.reduce((acc = 0, movement) => acc + movement);
+
+  labelBalance.textContent = `${balance} EUR`;
+};
+
+calcDispalyBalance(account1.movements);
