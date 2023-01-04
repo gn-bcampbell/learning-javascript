@@ -130,6 +130,29 @@ currenciesUnique.forEach((value, _, set) => {
            ? const sumWithInitial = array1.reduce((accumulator, currentValue) => accumulator + currentValue);
 */
 
+const euros = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const conversionRate = 1.12;
+
+const dollars = euros.map(x => x * conversionRate);
+console.log(dollars);
+
+const otherDollars = [];
+for (const euro of euros) {
+  otherDollars.push(euro * conversionRate);
+}
+console.log(otherDollars);
+
+// map has access to the same 3 parameters of forEach  (element, index, map)
+
+const movementsDescription = euros.map((mov, i, arr) => {
+  if (mov > 0) {
+    return `Movement ${i + 1}: You deposited ${mov}`;
+  } else {
+    return `Movement ${i + 1}: You withdrew ${Math.abs(mov)}`;
+  }
+});
+console.log(movementsDescription);
+
 // BANKIST APP
 
 // Data
