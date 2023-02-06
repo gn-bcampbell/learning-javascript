@@ -303,7 +303,50 @@ displayMovements(account1.movements);
 const calcDispalyBalance = function (movements) {
   const balance = movements.reduce((acc = 0, movement) => acc + movement);
 
-  labelBalance.textContent = `${balance} EUR`;
+  labelBalance.textContent = `${balance} €`;
 };
 
 calcDispalyBalance(account1.movements);
+
+const calcDisplaySummary = function (movements) {
+  const incomes = movements
+    .filter(x => x > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+
+  const outgoings = movements
+    .filter(x => x < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+
+  const interest = movements
+    .filter(x => x > 0)
+    .map(deposit => (deposit * 1.2) / 100) // * calculate percentages
+    .filter(interests => interests > 1) // * only get interests where rate is > 1
+    .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+
+  labelSumIn.textContent = `${incomes} €`;
+  labelSumOut.textContent = `${Math.abs(outgoings)} €`;
+  labelSumInterest.textContent = `${interest} €`;
+};
+
+calcDisplaySummary(account1.movements);
+
+/*
+    ! S11 | EP 155: Chaining Methods
+
+    * TIP: Don't overchain -> using massive arrays degrades performance
+    *      Don't chain methods that mutate arrays (ie splice)
+
+    * TIP: Inspect the array by using the built-in callback functions 
+    * i.e. .map((x, index, arr) => {
+    *       console.log(arr) //! see content here
+    *       return x * 1.1
+    * })
+*/
+
+// take all movements.deposits, convert them from euro to dollars and add them
+const totalDepositsToDollars = movements
+  .filter(x => x > 0)
+  .map(x => x * conversionRate)
+  .reduce((accumulator, current) => accumulator + current, 0);
+
+console.log(`Total deposits in dollars: ${totalDepositsToDollars}`);
