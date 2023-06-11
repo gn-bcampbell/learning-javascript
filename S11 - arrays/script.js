@@ -285,9 +285,8 @@ const displayMovements = function (movements) {
     let transactionDirection = movement < 0 ? 'withdrawal' : 'deposit';
     const html = `        
     <div class="movements__row">
-        <div class="movements__type movements__type--${transactionDirection}">${
-      index + 1
-    } ${transactionDirection}</div>
+        <div class="movements__type movements__type--${transactionDirection}">${index + 1
+      } ${transactionDirection}</div>
         <div class="movements__date">3 days ago</div>
         <div class="movements__value">${movement} €</div>
   </div>
@@ -350,3 +349,27 @@ const totalDepositsToDollars = movements
   .reduce((accumulator, current) => accumulator + current, 0);
 
 console.log(`Total deposits in dollars: ${totalDepositsToDollars}`);
+
+
+/*
+    ! S11 | EP 157: The Find Method
+
+    Find returns FIRST array element that matches condition (no new array created)
+
+    Filter returns ALL array elements that match condition (in a new array)
+*/
+
+// Example
+const firstWithdrawal = movements.find(mov => mov < 0)
+console.log(movements);
+console.log(firstWithdrawal);
+
+// Use-case
+const account = accounts.find(acc => acc.owner === 'Jessica Davis')
+console.log(account);
+
+// Alternative implementation
+for (const acc of accounts) {
+  if (acc.owner === 'Jessica Davis')
+    console.log(acc)
+}
