@@ -296,8 +296,6 @@ const displayMovements = function (movements) {
   });
 };
 
-displayMovements(account1.movements);
-
 // calc and disply balance
 const calcDispalyBalance = function (movements) {
   const balance = movements.reduce((acc = 0, movement) => acc + movement);
@@ -305,20 +303,19 @@ const calcDispalyBalance = function (movements) {
   labelBalance.textContent = `${balance} €`;
 };
 
-calcDispalyBalance(account1.movements);
 
-const calcDisplaySummary = function (movements) {
-  const incomes = movements
+const calcDisplaySummary = function (account) {
+  const incomes = account.movements
     .filter(x => x > 0)
     .reduce((acc, mov) => acc + mov, 0);
 
-  const outgoings = movements
+  const outgoings = account.movements
     .filter(x => x < 0)
     .reduce((acc, mov) => acc + mov, 0);
 
-  const interest = movements
+  const interest = account.movements
     .filter(x => x > 0)
-    .map(deposit => (deposit * 1.2) / 100) // * calculate percentages
+    .map(deposit => (deposit * account.interestRate) / 100) // * calculate percentages
     .filter(interests => interests > 1) // * only get interests where rate is > 1
     .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 
@@ -327,7 +324,6 @@ const calcDisplaySummary = function (movements) {
   labelSumInterest.textContent = `${interest} €`;
 };
 
-calcDisplaySummary(account1.movements);
 
 /*
     ! S11 | EP 155: Chaining Methods
@@ -373,3 +369,34 @@ for (const acc of accounts) {
   if (acc.owner === 'Jessica Davis')
     console.log(acc)
 }
+
+/*
+    ! S11 | EP 158: Implementing Login Controls
+*/
+
+let currentAccount;
+btnLogin.addEventListener('click', function (e) {
+  e.preventDefault(); //prevent form from submitting
+
+  currentAccount = accounts.find(acc => acc.username === inputLoginUsername.value);
+
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+
+    //Display UI and message
+    labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]}`
+
+    // Display movements
+    containerApp.style.opacity = 100;
+    // Clear input fields
+    inputLoginUsername.value = '';
+    inputLoginPin.value = '';
+    inputLoginPin.blur();
+
+    displayMovements(currentAccount.movements);
+    // Dispalay balance
+    calcDispalyBalance(currentAccount.movements)
+    // Displace summary
+    calcDisplaySummary(currentAccount);
+  }
+
+})
