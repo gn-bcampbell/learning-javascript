@@ -297,10 +297,9 @@ const displayMovements = function (movements) {
 };
 
 // calc and disply balance
-const calcDispalyBalance = function (movements) {
-  const balance = movements.reduce((acc = 0, movement) => acc + movement);
-
-  labelBalance.textContent = `${balance} €`;
+const calcDispalyBalance = function (account) {
+  account.balance = account.movements.reduce((acc = 0, movement) => acc + movement); //add property to account object
+  labelBalance.textContent = `${account.balance} €`;
 };
 
 
@@ -392,11 +391,38 @@ btnLogin.addEventListener('click', function (e) {
     inputLoginPin.value = '';
     inputLoginPin.blur();
 
-    displayMovements(currentAccount.movements);
-    // Dispalay balance
-    calcDispalyBalance(currentAccount.movements)
-    // Displace summary
-    calcDisplaySummary(currentAccount);
+    updateUI(currentAccount);
+  }
+})
+
+/*
+    ! S11 | EP 159: Implementing Transfers
+*/
+
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const transferTo = accounts.find(acc => acc.username === inputTransferTo.value);
+  const transferAmount = Number(inputTransferAmount.value);
+
+  //clear input fields
+  inputTransferAmount.value = inputTransferTo.value = ''
+
+  if (
+    transferAmount > 0
+    && transferTo
+    && transferAmount <= currentAccount.balance
+    && currentAccount.username !== transferTo?.username) {
+    transferTo?.movements.push(transferAmount);
+    currentAccount.movements.push(-transferAmount);
   }
 
+  updateUI(currentAccount)
 })
+
+
+const updateUI = (currentAccount) => {
+  displayMovements(currentAccount.movements);
+  calcDispalyBalance(currentAccount)
+  calcDisplaySummary(currentAccount);
+}
