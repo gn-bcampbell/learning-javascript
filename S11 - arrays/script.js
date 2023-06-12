@@ -420,9 +420,30 @@ btnTransfer.addEventListener('click', function (e) {
   updateUI(currentAccount)
 })
 
-
 const updateUI = (currentAccount) => {
   displayMovements(currentAccount.movements);
   calcDispalyBalance(currentAccount)
   calcDisplaySummary(currentAccount);
 }
+
+
+/*
+    ! S11 | EP 160: FindIndex() Method
+
+    Return the index number that matches the condition
+*/
+
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (inputCloseUsername.value === currentAccount.username
+    && Number(inputClosePin.value) === Number(currentAccount.pin)) {
+    console.log('account deleted');
+    const index = accounts.findIndex((acc) => acc.username === currentAccount.username)
+    accounts.splice(index, 1);
+  }
+
+  containerApp.style.opacity = 0;
+
+  inputClosePin.value = inputCloseUsername.value = ''
+})
