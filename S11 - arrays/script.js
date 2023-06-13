@@ -476,3 +476,44 @@ const depositAbove5000 = movements.some(x => x >= 5000)
 
 const everyDeposit = movements.every(x => 0); //false because of negative movements
 const everyDeposit2 = movements.every(x => typeof Number) // true because they're all numbers
+
+
+/*
+    ! S11 | EP 162: flat() and flatMap() Methods
+
+    - flat() only goes one level deep by default
+    - flat(2) will set depth to include nested arrays
+
+    - flatMap(array) is basically, .flat().map() but is more performant.
+    - only goes 1 level deep and cannot be changed
+*/
+
+// Flatten array and put all values into one new array - only goes ONE LEVEL DEEP
+const exampleArr = [[1, 2, 3], [4, 5, 6], 7, 8, 9]
+const flatArr = exampleArr.flat();
+console.log(flatArr);
+
+const superNested = [[1, 2, 3], [4, 5, 6], [[9, 10, 11], [12, 13]]]
+console.log(superNested.flat(2)); //set depth to get deeper levels
+
+const accountMovements = accounts.map((acc => acc.movements))
+console.log(accountMovements);
+
+const allAccountMovements = accountMovements.flat()
+console.log(allAccountMovements);
+
+const overallBalance = allAccountMovements.reduce((acc, mov) => acc + mov, 0);
+console.log(`Overall balance: ${overallBalance}`);
+
+// cleaned version
+const accMovements = accounts
+  .map(acc => acc.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0)
+console.log(accMovements);
+
+// only goes 1 level deep, cannot be changed
+const accMovementsPerfomant = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, mov) => acc + mov, 0)
+console.log(accMovementsPerfomant);
