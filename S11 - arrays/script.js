@@ -297,13 +297,13 @@ const displayMovements = function (movements) {
 };
 
 // calc and disply balance
-const calcDispalyBalance = function (account) {
+const calcDispalyBalance = (account) => {
   account.balance = account.movements.reduce((acc = 0, movement) => acc + movement); //add property to account object
   labelBalance.textContent = `${account.balance} €`;
 };
 
 
-const calcDisplaySummary = function (account) {
+const calcDisplaySummary = (account) => {
   const incomes = account.movements
     .filter(x => x > 0)
     .reduce((acc, mov) => acc + mov, 0);
@@ -374,7 +374,7 @@ for (const acc of accounts) {
 */
 
 let currentAccount;
-btnLogin.addEventListener('click', function (e) {
+btnLogin.addEventListener('click', (e) => {
   e.preventDefault(); //prevent form from submitting
 
   currentAccount = accounts.find(acc => acc.username === inputLoginUsername.value);
@@ -382,7 +382,7 @@ btnLogin.addEventListener('click', function (e) {
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
 
     //Display UI and message
-    labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]}`
+    labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]}`;
 
     // Display movements
     containerApp.style.opacity = 100;
@@ -399,17 +399,16 @@ btnLogin.addEventListener('click', function (e) {
     ! S11 | EP 159: Implementing Transfers
 */
 
-btnTransfer.addEventListener('click', function (e) {
+btnTransfer.addEventListener('click', (e) => {
   e.preventDefault();
 
   const transferTo = accounts.find(acc => acc.username === inputTransferTo.value);
   const transferAmount = Number(inputTransferAmount.value);
 
   //clear input fields
-  inputTransferAmount.value = inputTransferTo.value = ''
+  inputTransferAmount.value = inputTransferTo.value = '';
 
-  if (
-    transferAmount > 0
+  if (transferAmount > 0
     && transferTo
     && transferAmount <= currentAccount.balance
     && currentAccount.username !== transferTo?.username) {
@@ -417,7 +416,21 @@ btnTransfer.addEventListener('click', function (e) {
     currentAccount.movements.push(-transferAmount);
   }
 
-  updateUI(currentAccount)
+  updateUI(currentAccount);
+})
+
+btnLoan.addEventListener('click', (e) => {
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+
+  if (amount > 0
+    && currentAccount.movements.some(mov => mov >= amount * 0.10)) {
+    currentAccount.movements.push(amount);
+  }
+  updateUI(currentAccount);
+  inputLoanAmount.value = ''
+
 })
 
 const updateUI = (currentAccount) => {
@@ -433,7 +446,7 @@ const updateUI = (currentAccount) => {
     Return the index number that matches the condition
 */
 
-btnClose.addEventListener('click', function (e) {
+btnClose.addEventListener('click', (e) => {
   e.preventDefault();
 
   if (inputCloseUsername.value === currentAccount.username
@@ -447,3 +460,19 @@ btnClose.addEventListener('click', function (e) {
 
   inputClosePin.value = inputCloseUsername.value = ''
 })
+
+
+/*
+    ! S11 | EP 161: Some() Method & Every() Method
+    - true if some/any value matches condition
+    
+    - includes() is an equality check, i.e. one value === -130
+    - some() is a conditional check, i.e. at least one value >= -450 
+      - any() in C#
+*/
+
+const anyDeposits = movements.some(x => x > 0);
+const depositAbove5000 = movements.some(x => x >= 5000)
+
+const everyDeposit = movements.every(x => 0); //false because of negative movements
+const everyDeposit2 = movements.every(x => typeof Number) // true because they're all numbers
