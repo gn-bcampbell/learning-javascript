@@ -277,11 +277,14 @@ const maxValue2 = movements.reduce((accumulator, current) => {
 
 console.log(maxValue, maxValue2);
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = ''; // remove test data before adding
 
+  // create a copy using slice
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
   //loop over all movements and create html elements containing data
-  movements.forEach((movement, index) => {
+  movs.forEach((movement, index) => {
     let transactionDirection = movement < 0 ? 'withdrawal' : 'deposit';
     const html = `        
     <div class="movements__row">
@@ -517,3 +520,29 @@ const accMovementsPerfomant = accounts
   .flatMap(acc => acc.movements)
   .reduce((acc, mov) => acc + mov, 0)
 console.log(accMovementsPerfomant);
+
+
+/*
+    ! S11 | EP 163: Sorting arrays
+
+    - Mutates actual array
+    - Sorts by strings so callback is required for numbers
+*/
+
+const owners = ['Jonas', 'Zach', 'Adam', 'Martha']
+console.log(owners.sort());
+
+// Implement this callback to sort numbers in ascending order
+// return < 0, A, B (keep order)
+// return > 0, A, B (switch order)
+movements.sort((a, b) => {
+  if (a > b) return 1;
+  if (a < b) return -1;
+})
+
+let sorted = false
+btnSort.addEventListener('click', (e) => {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
+})
