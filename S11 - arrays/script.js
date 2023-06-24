@@ -546,3 +546,47 @@ btnSort.addEventListener('click', (e) => {
   displayMovements(currentAccount.movements, !sorted);
   sorted = !sorted;
 })
+
+
+/*
+    ! S11 | EP 164: More ways of creating and filling arrays
+
+    fill()          - mutate original array
+    fill(18, 2, 6)  - insert 18 from indexes 2 to 5 (6 not included)
+*/
+
+const option1 = [1, 2, 3, 4, 5, 6, 7];
+const option2 = new Array([1, 2, 3, 4, 5, 6, 7]);
+
+const setLength = new Array(7); // creates array with 7 empty elements
+// setLength.fill(1) // fills all 7 elements with 1
+setLength.fill(1, 3, 5)
+console.log(setLength);
+
+Array.from({ length: 7 }, () => 1); // fill each position with 1 using callback function
+const z = Array.from({ length: 7 }, (_, i) => i + 1); // _ indicates a required but unused parameter
+console.log(z);
+
+let rand = Math.floor(Math.random() * 7)
+console.log(rand);
+
+let diceRolls = Array.from({ length: 101 }, () => Math.floor(Math.random() * 7))
+console.log(diceRolls);
+
+
+/*
+  Create a nodeList from the DOM element movements__value and create an array from it
+  Use map to traverse that array to get its text content and get the numeric values from it
+*/
+labelBalance.addEventListener('click', (e) => {
+  const movementsUI = Array.from(document.querySelectorAll('.movements__value'))
+  const movementsUIValues = movementsUI.map(el => el.textContent.replace('€', ''));
+  console.log(movementsUI);
+  console.log(movementsUIValues);
+
+  // do it in one using the call back function
+  const movementsValues = Array.from(document.querySelectorAll('.movements__value'),
+    el => Number(el.textContent.replace('€', '')));
+  console.log(movementsValues);
+
+})
