@@ -8,7 +8,7 @@
 - [x] Section 8: How JavaScript Works Behind the Scenes
 - [x] Section 9: Data Structure, Modern Operators and Strings
 - [x] Section 10: A Closer Look at Functions
-- [ ] Section 11: Working with Arrays
+- [x] Section 11: Working with Arrays
 - [ ] Section 13: Advanced DOM and Events
 - [ ] Section 14: Object-Oriented Programming with JavaScript
 - [ ] Section 16: Asynchronous JavaScript: Promises, Async/Await, and AJAX
