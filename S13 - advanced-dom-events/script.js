@@ -32,6 +32,11 @@ document.addEventListener('keydown', function (e) {
 });
 
 
+/*
+    ! S13 | EP 182 - 184: Selecting, Creating, and Deleting Element
+*/
+
+
 // ! Selecting
 console.log(document.documentElement);
 console.log(document.head);
@@ -68,3 +73,37 @@ header.prepend(message) //show at top of header
 document.querySelector('.btn--close-cookie').addEventListener('click', function () {
   message.remove()
 })
+
+/*
+    ! S13 | EP 187: Styles, Attributes, and Classes
+*/
+
+// ! Styles (inline)
+message.style.backgroundColor = '#37384d'
+message.style.width = '120%'
+
+console.log(message.style.height);  // doesn't work because we haven't explicitly set it inline
+console.log(message.style.backgroundColor); // does work because we set it inline above
+console.log(getComputedStyle(message).color); // shows everything, here we only select color
+
+message.style.height = Number.parseFloat(getComputedStyle(message).height, 10) + 30 + 'px'
+
+// ! CSS Variables / Custom Properties
+document.documentElement.style.setProperty('--color-primary', 'orangered')
+
+// ! Attributes
+const logo = document.querySelector('.nav__logo')
+console.log(logo.src); // absolute
+console.log(logo.getAttribute('src')); //relative
+console.log(logo.alt);
+console.log(logo.className);
+logo.alt = 'Minimalist Bankist Logo'
+
+// ! Data Attributes
+console.log(logo.dataset.versionNumber); //requires camelCase 'data-version-number'
+
+// ! Classes (top 4)
+logo.classList.add('c')
+logo.classList.remove('c')
+logo.classList.toggle('c')
+logo.classList.contains('c')
