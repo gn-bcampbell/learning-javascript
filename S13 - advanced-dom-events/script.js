@@ -107,3 +107,16 @@ logo.classList.add('c')
 logo.classList.remove('c')
 logo.classList.toggle('c')
 logo.classList.contains('c')
+
+
+/*
+    ! S13 | EP 188: Smooth Scrolling
+*/
+
+// add an event listener to the button, then scroll to the section you want
+document.querySelector('.btn--scroll-to').addEventListener('click', (e) => {
+  e.preventDefault();
+  document.querySelector('#section--1').scrollIntoView({
+    behavior: "smooth"
+  })
+})
