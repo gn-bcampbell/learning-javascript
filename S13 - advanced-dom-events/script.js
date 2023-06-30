@@ -120,3 +120,24 @@ document.querySelector('.btn--scroll-to').addEventListener('click', (e) => {
     behavior: "smooth"
   })
 })
+
+
+/*
+    ! S13 | EP 189: Events and Event Handlers
+
+    A signal from a node that is sent from the DOM
+    ? AddEventListener is better 
+      - lets you add multiple events
+      - allows you to remove event listeners
+*/
+
+const h1 = document.querySelector('h1');
+const showAlert = () => {
+  alert('addEventListening mouse hover')
+}
+
+h1.addEventListener('mouseenter', showAlert)
+h1.removeEventListener('mouseenter', showAlert)
+// setTimeout(() => h1.removeEventListener('mouseenter', showAlert), 3000)
+
+
