@@ -131,13 +131,13 @@ document.querySelector('.btn--scroll-to').addEventListener('click', (e) => {
       - allows you to remove event listeners
 */
 
-const h1 = document.querySelector('h1');
-const showAlert = () => {
-  alert('addEventListening mouse hover')
-}
+// const heading1 = document.querySelector('h1');
+// const showAlert = () => {
+//   alert('addEventListening mouse hover')
+// }
 
-h1.addEventListener('mouseenter', showAlert)
-h1.removeEventListener('mouseenter', showAlert)
+// heading1.addEventListener('mouseenter', showAlert)
+// heading1.removeEventListener('mouseenter', showAlert)
 // setTimeout(() => h1.removeEventListener('mouseenter', showAlert), 3000)
 
 /*
@@ -165,7 +165,7 @@ const randomColor = () => `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${rando
 
 
 /*
-    ! S13 | EP 193: Smooth scrolling on navigation
+    ! S13 | EP 192: Smooth scrolling on navigation
 */
 
 // ! this approach is fine for 3 elements, but for 1000s it's unfit & will add a function to each element
@@ -189,3 +189,29 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
     document.querySelector(id).scrollIntoView({ behavior: 'smooth' })
   }
 })
+
+
+/*
+    ! S13 | EP 193: DOM Traversing
+
+    ? Select an element, based on another element (direct child or parent or unknown)
+*/
+
+// ? Select children
+const h1 = document.querySelector('h1');
+console.log(h1.querySelectorAll('.highlight')); //select all child elements of h1 with class name of highlight regardless of depth
+console.log(h1.children); //get direct children
+h1.firstElementChild.style.color = 'white' //banking
+h1.lastElementChild.style.color = 'orangered' //minimalist
+
+// ? Select parents
+console.log(h1.parentNode);
+console.log(h1.parentElement);
+
+// Find the closest header to our H1 element (closest parent element to the specified class)
+// opposite of query selector - it finds all children, whilst closest finds parents
+h1.closest('.header').style.background = 'var(--gradient-secondary)'
+
+// access siblings
+console.log(h1.previousElementSibling); // null because it's the first
+console.log(h1.nextElementSibling); // h4 element
