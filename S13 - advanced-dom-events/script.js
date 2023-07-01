@@ -140,4 +140,25 @@ h1.addEventListener('mouseenter', showAlert)
 h1.removeEventListener('mouseenter', showAlert)
 // setTimeout(() => h1.removeEventListener('mouseenter', showAlert), 3000)
 
+/*
+    ! S13 | EP 191: Event Propogation in practice
 
+    ? Capturing: If an event like 'click' happens, it starts at the .document level and flows down through 
+    ?           all nodes until it hits the target element it's applied to.
+
+    ? Bubbling: Events bubble up from the target through all the PARENT elements
+
+*/
+
+const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
+const randomColor = () => `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
+
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor();
+}) //bubbles up to happen on all 3 -> .nav__link is the target on all 3 levels of bubbling
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor()
+}) //bubbles up to happen on this and .nav
+document.querySelector('.nav').addEventListener('click', function (e) {
+  this.style.backgroundColor = randomColor()
+}) //only affects .nav because this is the parent element
