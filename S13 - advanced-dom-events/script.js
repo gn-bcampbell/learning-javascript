@@ -153,12 +153,39 @@ h1.removeEventListener('mouseenter', showAlert)
 const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
 const randomColor = () => `rgb(${randomInt(0, 255)},${randomInt(0, 255)},${randomInt(0, 255)})`;
 
-document.querySelector('.nav__link').addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor();
-}) //bubbles up to happen on all 3 -> .nav__link is the target on all 3 levels of bubbling
+// document.querySelector('.nav__link').addEventListener('click', function (e) {
+//   this.style.backgroundColor = randomColor();
+// }) //bubbles up to happen on all 3 -> .nav__link is the target on all 3 levels of bubbling
+// document.querySelector('.nav__links').addEventListener('click', function (e) {
+//   this.style.backgroundColor = randomColor()
+// }) //bubbles up to happen on this and .nav
+// document.querySelector('.nav').addEventListener('click', function (e) {
+//   this.style.backgroundColor = randomColor()
+// }) //only affects .nav because this is the parent element
+
+
+/*
+    ! S13 | EP 193: Smooth scrolling on navigation
+*/
+
+// ! this approach is fine for 3 elements, but for 1000s it's unfit & will add a function to each element
+// document.querySelectorAll('.nav__link').forEach(function (el) {
+//   el.addEventListener('click', function (e) {
+//     e.preventDefault();
+//     const id = this.getAttribute('href');
+//     document.querySelector(id).scrollIntoView({ behavior: 'smooth' })
+//   })
+// })
+
+
+// ? Alternative: event delegation - add event to common parent element
+//determine what element originated the event to work with the correct one
 document.querySelector('.nav__links').addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor()
-}) //bubbles up to happen on this and .nav
-document.querySelector('.nav').addEventListener('click', function (e) {
-  this.style.backgroundColor = randomColor()
-}) //only affects .nav because this is the parent element
+  e.preventDefault();
+  // matching strategy - check if target element contains the class we're interested in
+  if (e.target.classList.contains('nav__link')) {
+    console.log('inside navlink');
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' })
+  }
+})
