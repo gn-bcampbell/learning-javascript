@@ -215,3 +215,26 @@ h1.closest('.header').style.background = 'var(--gradient-secondary)'
 // access siblings
 console.log(h1.previousElementSibling); // null because it's the first
 console.log(h1.nextElementSibling); // h4 element
+
+
+/*
+    ! S13 | EP 194: Building a tabbed component
+*/
+const tabs = document.querySelectorAll('.operations__tab')
+const tabsContainer = document.querySelector('.operations__tab-container')
+const tabsContent = document.querySelectorAll('.operations__content')
+
+tabsContainer.addEventListener('click', function (e) {
+
+  const clicked = e.target.closest('.operations__tab')
+  if (!clicked) return;
+
+  // remove active class list on all elements so they're made inactive 
+  tabs.forEach((el) => el.classList.remove('operations__tab--active'))
+  tabsContent.forEach((el) => el.classList.remove('operations__content--active'))
+
+  // adjust classlist to add active setting for the element(s) we want to show
+  clicked.classList.add('operations__tab--active')
+  const toShow = document.querySelector(`.operations__content--${clicked.dataset.tab}`)
+  toShow.classList.add('operations__content--active')
+})
