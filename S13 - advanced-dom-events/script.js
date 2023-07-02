@@ -238,3 +238,35 @@ tabsContainer.addEventListener('click', function (e) {
   const toShow = document.querySelector(`.operations__content--${clicked.dataset.tab}`)
   toShow.classList.add('operations__content--active')
 })
+
+
+/*
+    ! S13 | EP 195: Passing arguments to Event Handlers
+
+    Event delegation to create menu fades
+*/
+
+const navigation = document.querySelector('.nav');
+const navItems = document.querySelectorAll('.nav__items')
+
+const alterNav = function (e, opactity) {
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
+
+    siblings.forEach(el => {
+      if (el !== link) el.style.opacity = opactity
+    })
+    logo.style.opacity = opactity
+  }
+}
+
+navigation.addEventListener('mouseover', function (e) {
+  alterNav(e, 0.5);
+})
+
+navigation.addEventListener('mouseout', function (e) {
+  alterNav(e, 1);
+})
+
