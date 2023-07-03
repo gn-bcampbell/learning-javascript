@@ -270,3 +270,21 @@ navigation.addEventListener('mouseout', function (e) {
   alterNav(e, 1);
 })
 
+/*
+    ! S13 | EP 196: Sticky Navigation: The Scroll event
+*/
+
+const navBar = document.querySelector('.nav');
+const section1 = document.getElementById('section--1')
+const initialCoords = section1.getBoundingClientRect();
+
+window.addEventListener('scroll', () => {
+
+  if (window.scrollY > initialCoords.top) {
+    navBar.classList.add('sticky')
+  } else {
+    navBar.classList.remove('sticky')
+  }
+
+})
+
