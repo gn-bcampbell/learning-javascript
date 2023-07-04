@@ -9,7 +9,7 @@
 - [x] Section 9: Data Structure, Modern Operators and Strings
 - [x] Section 10: A Closer Look at Functions
 - [x] Section 11: Working with Arrays
-- [ ] Section 13: Advanced DOM and Events
+- [x] Section 13: Advanced DOM and Events
 - [ ] Section 14: Object-Oriented Programming with JavaScript
 - [ ] Section 16: Asynchronous JavaScript: Promises, Async/Await, and AJAX
 - [ ] Section 17: Modern JavaScript Development: Modules, Tooling and Functional
