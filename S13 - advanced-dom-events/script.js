@@ -272,19 +272,19 @@ navigation.addEventListener('mouseout', function (e) {
 
 /*
     ! S13 | EP 196: Sticky Navigation: The Scroll event
+    DEPRECATED
 */
 
 const navBar = document.querySelector('.nav');
 const section1 = document.getElementById('section--1')
 const initialCoords = section1.getBoundingClientRect();
 
-window.addEventListener('scroll', () => {
+// window.addEventListener('scroll', () => {
 
-  if (window.scrollY > initialCoords.top) {
-    navBar.classList.add('sticky')
-  } else {
-    navBar.classList.remove('sticky')
-  }
-
-})
+//   if (window.scrollY > initialCoords.top) {
+//     navBar.classList.add('sticky')
+//   } else {
+//     navBar.classList.remove('sticky')
+//   }
+// })
 
