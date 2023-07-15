@@ -105,3 +105,42 @@ Person.hey = function () {
     // console.log(this);
 }
 Person.hey()
+
+
+/*
+    ! S13 | EP 216: Object.create
+
+    ? Least used.
+    * No prototype properties
+    * No constructor functions
+    * No 'new' keyword
+    * We can manually set the prototype of an object to any other Object we want
+*/
+
+// create an object that we want to be the prototype for this object
+const PersonProto = {
+    calcAge() {
+        console.log(2037 - this.birthYear);
+    },
+
+
+    // workaround for constructor - same as it.
+    init(firstName, birthYear) {
+        this.firstName = firstName;
+        this.birthYear = birthYear;
+    }
+}
+
+// create a new empty object that's linked to proto object
+const steven = Object.create(PersonProto);
+steven.name = 'Steven'
+steven.birthYear = 1993
+steven.calcAge();
+
+console.log(steven);
+console.log(steven.__proto__ === PersonProto); //true
+
+// Create object programmatically 
+const sarah = Object.create(PersonProto)
+sarah.init('Sarah', 1979)
+sarah.calcAge()
