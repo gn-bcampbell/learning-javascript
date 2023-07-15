@@ -46,6 +46,10 @@ class Person {
     get fullName() {
         return this._fullName
     }
+
+    static staticHi() {
+        console.log('Static Hi from Person 🙋‍♀️');
+    }
 }
 
 const jess = new Person('Jessica Davis', 1993)
@@ -54,6 +58,7 @@ jess.calcAge()
 console.log(`--- Using get / set functions from class --- `);
 console.log(jess.age);
 console.log(jess.fullName);
+Person.staticHi()
 console.log(`--- Finished using get / set functions from class --- `);
 
 console.log(jess.__proto__ === Person.prototype); //true
@@ -69,7 +74,6 @@ jess.greet() //add greet to Person, but called on instance of Person
     ! S13 | EP 214: Setters and Getters
 
     * Common to all objects
-    * Getters and Setters are 
 */
 
 const account = {
@@ -89,3 +93,15 @@ console.log(account.latest); //used as property - no ()
 account.latest = 50 //also a property
 console.log(account.latest);
 console.log(account.movements);
+
+
+/*
+    ! S13 | EP 215: Static Methods
+*/
+
+// Can't be inherited by Person instances, as it's not added to `prototype`
+Person.hey = function () {
+    console.log('Hey there 👋');
+    // console.log(this);
+}
+Person.hey()
