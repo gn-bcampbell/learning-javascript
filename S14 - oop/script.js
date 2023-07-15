@@ -62,3 +62,34 @@ console.log(Person.prototype.isPrototypeOf(Person)); // false
 // ? It is step 3 from above, it sets its value to the prototype property of the function being called (Person)
 
 Person.prototype.species = 'Homo Sapiens' //now gets applied to the __proto__ of all objects (brendan, jack, matilda)
+
+
+/*
+    ! S13 | EP 211: Prototypal Inheritence on Built-In objects
+
+    All objects are inherited from JavaScripts base Object() class
+    If a function or variable called on an object doesn't exist, JS will go up the chain to find if it exists in the Prototypal inheritence
+
+    Note this is why MDN documentation uses Array.prototype.IndexOf() because the method is inherited to new arrays from the Array __proto__ 
+*/
+
+console.log(brendan.__proto__.__proto__); // goes up the chain to return Object __proto__
+console.log(brendan.hasOwnProperty('firstName')); // this is why we can call hasOwnProperty as it's a function available within the __proto__ of Object
+console.log(brendan.__proto__.__proto__.__proto__); // null
+// console.log(brendan.fakeMethod()) // this will fail because it doesn't exist on Brendan, Person or Object __proto__
+
+console.dir(Person.prototype.constructor);
+
+const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9, 9]; // new Array === [] 
+console.log(arr.__proto__); // returns all methods inherited from the Array.prototype
+console.log(arr.__proto__ === Array.prototype); //true
+console.log(arr.__proto__.__proto__); // goes back to the Object prototype
+
+// ! You could extend the functionality of an inbuilt object... but DON'T DO THIS THO
+Array.prototype.unique = function () {
+    return [...new Set(this)]
+}
+console.log(arr.unique());
+
+const h1 = document.querySelector('h1');
+console.dir(h1); // __proto__ is a HTMLHeadingElement --> HTMLElement --> Element --> Node --> EventTarget --> Object
