@@ -20,8 +20,8 @@
 */
 
 const Car = function (make, speed) {
-    this.make = make,
-        this.speed = speed
+    this.make = make;
+    this.speed = speed;
 }
 
 Car.prototype.accelerate = function () {
