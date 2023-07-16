@@ -62,34 +62,49 @@ brendan.hey; // child classes do not inherit static methods from parents
 
 
 /*
-    S13 | EP 222 - 223: Class example & Encapsulation
+    S13 |   EP 222 : Class example 
+        |   EP 223 : Encapsulation
+        |   EP 224 : Private Class Fields and Methods
 
     ? Default values into constructor
     ? Calling instance methods inside other instance methods (deposit/withdraw)
     ? _underscore convention to denote private/readonly fields.
+
+    ? public fields     ->  create a class variable
+    ? private fields    ->  prefix with #
+    ? public methods    ->  standard ES6 methods 
+    ? private methods   ->  method prefix with #
+    ? static            ->  applies to all public/private fields/methods
 */
 
 
 class Account {
+    // ! public fields (instances)
+    locale = navigator.language;
+    // ! private fields
+    #movements = [];
+
     constructor(owner, currency, pin) {
         this.owner = owner;
         this.currency = currency;
         // *  add default values via constructor without having to pass them in
-        this.locale = navigator.language;
+        // this.locale = navigator.language;
 
         // * protected _ is a convention - can be edited, but is a convention to inform others that it shouldn't be
-        this._movements = []
+        // this._movements = []
         this._pin = pin;
 
         console.log(`Thanks for opening an account, ${this.owner}`);
     }
 
+    // ! public methods
+
     getMovements() {
-        return this._movements;
+        return this.#movements;
     }
 
     deposit(value) {
-        this._movements.push(value)
+        this.#movements.push(value)
     }
 
     withdraw(value) {
@@ -107,6 +122,11 @@ class Account {
             console.log(`Loan approved`)
         }
     }
+
+    // ! private methods
+    #approvedInformation() {
+        return false;
+    }
 }
 
 const account1 = new Account('Brendan', 'EUR', 1111)
@@ -114,4 +134,6 @@ console.log(account1);
 account1.deposit(444)
 account1.withdraw(123)
 account1.requestLoan(1000);
-console.log(account1);
+// console.log(account1.#movements); // ! fails becuase it's a private field
+// console.log(account1.#approvedInformation()); // ! fails becuase it's not implemented yet in JavaScript
+console.log(account1); 
