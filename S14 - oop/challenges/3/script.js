@@ -62,10 +62,11 @@ brendan.hey; // child classes do not inherit static methods from parents
 
 
 /*
-    S13 | EP 222: Class example
+    S13 | EP 222 - 223: Class example & Encapsulation
 
     ? Default values into constructor
     ? Calling instance methods inside other instance methods (deposit/withdraw)
+    ? _underscore convention to denote private/readonly fields.
 */
 
 
@@ -73,28 +74,35 @@ class Account {
     constructor(owner, currency, pin) {
         this.owner = owner;
         this.currency = currency;
-        this.pin = pin;
         // *  add default values via constructor without having to pass them in
-        this.movements = []
         this.locale = navigator.language;
+
+        // * protected _ is a convention - can be edited, but is a convention to inform others that it shouldn't be
+        this._movements = []
+        this._pin = pin;
 
         console.log(`Thanks for opening an account, ${this.owner}`);
     }
 
+    getMovements() {
+        return this._movements;
+    }
+
     deposit(value) {
-        this.movements.push(value)
+        this._movements.push(value)
     }
 
     withdraw(value) {
         this.deposit(-value)
     }
 
-    approveLoan() {
+    // _ denotes readOnly
+    _approveLoan() {
         return true;
     }
 
     requestLoan(val) {
-        if (this.approveLoan) {
+        if (this._approveLoan) {
             this.deposit(val)
             console.log(`Loan approved`)
         }
