@@ -59,3 +59,51 @@ const brendan = new Student('Brendan C', 1993, 'Software Engineeering');
 brendan.introduce();
 brendan.calcAge();
 brendan.hey; // child classes do not inherit static methods from parents
+
+
+/*
+    S13 | EP 222: Class example
+
+    ? Default values into constructor
+    ? Calling instance methods inside other instance methods (deposit/withdraw)
+*/
+
+
+class Account {
+    constructor(owner, currency, pin) {
+        this.owner = owner;
+        this.currency = currency;
+        this.pin = pin;
+        // *  add default values via constructor without having to pass them in
+        this.movements = []
+        this.locale = navigator.language;
+
+        console.log(`Thanks for opening an account, ${this.owner}`);
+    }
+
+    deposit(value) {
+        this.movements.push(value)
+    }
+
+    withdraw(value) {
+        this.deposit(-value)
+    }
+
+    approveLoan() {
+        return true;
+    }
+
+    requestLoan(val) {
+        if (this.approveLoan) {
+            this.deposit(val)
+            console.log(`Loan approved`)
+        }
+    }
+}
+
+const account1 = new Account('Brendan', 'EUR', 1111)
+console.log(account1);
+account1.deposit(444)
+account1.withdraw(123)
+account1.requestLoan(1000);
+console.log(account1);
