@@ -22,6 +22,7 @@ const inputElevation = document.querySelector('.form__input--elevation');
 if(navigator.geolocation)
   navigator.geolocation.getCurrentPosition(function(position){
     const {latitude, longitude} = position.coords;
+    const coords = [latitude, longitude];
 
     // 'map' here is the element in which to display the leaflet map view
     // 'L' is the namespace for leaflet's methods
@@ -32,9 +33,20 @@ if(navigator.geolocation)
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    L.marker([51.5, -0.09]).addTo(map)
-      .bindPopup('A pretty CSS popup.<br> Easily customizable.')
-      .openPopup();
-  }, function(){
+    map.on('click', function(mapEvent){
+      const { lat, lng } = mapEvent.latlng;
+
+      L.marker([lat, lng])
+        .addTo(map)
+        .bindPopup(L.popup({maxWidth: 250,
+          minWidth: 100,
+          autoClose: false,
+          closeOnClick: false,
+          className:'running-popup'}))
+        .setPopupContent('Workout')
+        .openPopup();
+    })},
+    function(){
     alert('Could not get position')
   })
+
