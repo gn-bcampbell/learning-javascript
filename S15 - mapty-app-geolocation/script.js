@@ -22,7 +22,19 @@ const inputElevation = document.querySelector('.form__input--elevation');
 if(navigator.geolocation)
   navigator.geolocation.getCurrentPosition(function(position){
     const {latitude, longitude} = position.coords;
-    console.log(`https://www.google.pt/maps/@${latitude}${longitude}`);
+
+    // 'map' here is the element in which to display the leaflet map view
+    // 'L' is the namespace for leaflet's methods
+    const map = L.map('map').setView([latitude, longitude], 13);
+
+    // tile layer method uses openStreetMap to populate its tiles.
+    L.tileLayer('https://tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    L.marker([51.5, -0.09]).addTo(map)
+      .bindPopup('A pretty CSS popup.<br> Easily customizable.')
+      .openPopup();
   }, function(){
     alert('Could not get position')
   })
