@@ -11,6 +11,7 @@ const inputElevation = document.querySelector('.form__input--elevation');
 class Workout{
   date = new Date();
   id = (Date.now() + '').slice(-10);
+  clicks = 0;
 
   constructor(coords, distance, duration) {
     this.coords = coords; // [lat, lng]
@@ -24,6 +25,10 @@ class Workout{
 
     // set description
     this.description = `${this.type[0].toUpperCase()}${this.type.slice(1)} on ${months[this.date.getMonth()]} ${this.date.getDate()}`;
+  }
+
+  click() {
+    this.clicks++;
   }
 }
 
@@ -42,6 +47,7 @@ class Running extends Workout {
     this.pace = this.duration / this.distance;
     return this.pace;
   }
+
 }
 class Cycling extends Workout {
   type = 'cycling';
@@ -75,6 +81,7 @@ class App {
     this._getPosition(); //call here so it is called when new App is instantiated outside of class
     form.addEventListener('submit', this._newWorkout.bind(this));
     inputType.addEventListener('change', this._toggleElevationField);
+    containerWorkouts.addEventListener('click', this._moveToPopup.bind(this));
   }
 
   _getPosition() {
@@ -189,10 +196,10 @@ class App {
       this._renderWorkoutMarker(workout)
 
       // Render workout on list
-    this._renderWorkout(workout)
+      this._renderWorkout(workout)
 
       // Hide form + clear input fields
-    this._hideForm();
+      this._hideForm();
     };
 
   _renderWorkoutMarker(workout){
@@ -211,7 +218,6 @@ class App {
   }
 
   _renderWorkout(workout) {
-    console.log(workout);
     // create some html markup, and insert into DOM
     let html = `
     <li class="workout workout--${workout.type}" data-id="${workout.id}">
@@ -259,6 +265,23 @@ class App {
       `
 
     form.insertAdjacentHTML('afterend', html);
+  }
+
+  _moveToPopup(e) {
+    const workoutEl = e.target.closest('.workout');
+    if (!workoutEl) return;
+    console.log(workoutEl)
+
+    const workout = this.#workouts.find(work => work.id === workoutEl.dataset.id);
+
+    this.#map.setView(workout.coords, 13, {
+      animate: true,
+      pan: {
+        duration: 1,
+      }
+    })
+
+    workout.click()
   }
 }
 
