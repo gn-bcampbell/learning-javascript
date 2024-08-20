@@ -141,7 +141,7 @@ const getCountryData2 = function (country) {
 // getCountryData2('portugal')
 
 /*
-    ! S16 | EP 253: Chain Promises
+    ! S16 | EP 254: Chain Promises
 
     whatever is returned by a promise, becomes the 'fulfilled' value, eg. neighbour country promise
 */
@@ -159,6 +159,17 @@ const getCountryData3 = function (country) {
         })
         .then(response => response.json())
         .then(data => renderCountry(data[0], 'neighbour'))
+        .catch(err => renderError(err.message)) //! S16 | EP 255: Handle Rejected Promises / Errors from promises
 }
 
 getCountryData3('republic of ireland')
+
+
+/*
+    ! S16 | EP 255: Handle Rejected Promises / Errors from promises
+*/
+const renderError = function (message) {
+    countriesContainer.insertAdjacentText('beforeend', message)
+    countriesContainer.style.opacity = 1;
+}
+
