@@ -111,5 +111,31 @@ const getCountryAndNeighbour = function (country) {
         })
     });
 };
+// getCountryAndNeighbour('usa');
 
-getCountryAndNeighbour('usa');
+/*
+    ! S16 | EP 252: Promise and Fetch API
+
+    Fetch returns a 'Promise' with 'pending' (placeholder for a future result)
+    We can chain promises instead of nesting them in callback hell.
+
+    pending -> settled (fulfilled or rejected) -> consume 
+*/
+const request = fetch('https://restcountries.com/v3.1/name/portugal')
+// console.log(request) //'pending'
+
+/*
+    ! S16 | EP 253: Consume Promises
+
+    First  .then(): Callback function on response body (using json() is also a promise)
+    Second .then(): Capture data from json() promise and get the data inside the response
+
+    response contains a 'Body' that is a 'ReadableStream' -> convert it to json()
+*/
+const getCountryData2 = function (country) {
+    fetch(`https://restcountries.com/v3.1/name/${country}`)
+        .then(response => response.json()) // this returns a promise to be consumed by next then())
+        .then(data => renderCountry(data[0])) // this contains the actual data payload
+}
+
+getCountryData2('portugal')
