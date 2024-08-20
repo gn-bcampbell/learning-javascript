@@ -138,4 +138,27 @@ const getCountryData2 = function (country) {
         .then(data => renderCountry(data[0])) // this contains the actual data payload
 }
 
-getCountryData2('portugal')
+// getCountryData2('portugal')
+
+/*
+    ! S16 | EP 253: Chain Promises
+
+    whatever is returned by a promise, becomes the 'fulfilled' value, eg. neighbour country promise
+*/
+
+const getCountryData3 = function (country) {
+    fetch(`https://restcountries.com/v3.1/name/${country}`)
+        .then(response => response.json())
+        .then(data => {
+            renderCountry(data[0])
+
+            const neighbour = data[0].borders?.[0] //optional chaining for country with no borders
+
+            // return required to allow us to chain another .then() because it returns a promise
+            return fetch(`https://restcountries.com/v3.1/alpha/${neighbour}`)
+        })
+        .then(response => response.json())
+        .then(data => renderCountry(data[0], 'neighbour'))
+}
+
+getCountryData3('republic of ireland')
