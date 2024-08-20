@@ -162,14 +162,40 @@ const getCountryData3 = function (country) {
         .catch(err => renderError(err.message)) //! S16 | EP 255: Handle Rejected Promises / Errors from promises
 }
 
-getCountryData3('republic of ireland')
+// getCountryData3('republic of ireland')
 
-
-/*
-    ! S16 | EP 255: Handle Rejected Promises / Errors from promises
-*/
 const renderError = function (message) {
     countriesContainer.insertAdjacentText('beforeend', message)
     countriesContainer.style.opacity = 1;
 }
 
+/*
+    ! S16 | EP 256: Handle Rejected Promises / Errors from promises
+
+    Create helper function to tidy up chaining events and error handling
+*/
+
+const getJson = function (url, errorMsg = '') {
+    // make sure to return the fetch so you can chain the .then()
+    return fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                console.log(`Something went wrong: ${errorMsg}`)
+            }
+
+            return response.json();
+        })
+}
+
+const getCountryData4 = function (country) {
+    getJson(`https://restcountries.com/v3.1/name/${country}`, 'Country not found')
+        .then(data => {
+            renderCountry(data[0])
+            const neighbour = data[0].borders?.[0]
+            return getJson(`https://restcountries.com/v3.1/alpha/${neighbour}`, 'Country not found')
+        })
+        .then(data => renderCountry(data[0], 'neighbour'))
+        .catch(err => renderError(err.message))
+}
+
+getCountryData4('vietnam')
