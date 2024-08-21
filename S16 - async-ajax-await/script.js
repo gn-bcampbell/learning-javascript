@@ -199,3 +199,55 @@ const getCountryData4 = function (country) {
 }
 
 getCountryData4('vietnam')
+
+
+/*
+    ! S16 | EP 260: Building a Promise
+
+    - Executor() -> resolve() -> reject()
+
+    Promise is a special object: takes 1 argument (executor function)
+    Executor function needs 2 arguments: (resolve, reject)
+*/
+
+// Create Promise
+const lottery = new Promise(function (resolve, reject) {
+    console.log('Lottery draw pending 🔮')
+    setTimeout(function () {
+        // contains async behaviour to be handled by Promise (future value of promise)
+        if (Math.random() >= 0.5) {
+            // pass fulfilled value of promise so it can be later consumed by .then()
+            resolve('Value is greater than 0.5 🏆')
+        } else {
+            reject(new Error('Loser 🐡'))
+        }
+    }, 2000)
+});
+
+// Consume Promise
+lottery.then(res => console.log(res)).catch(err => console.error(err))
+
+// Promisfying wait timeout
+const wait = function (seconds) {
+    return new Promise(function (resolve, reject) {
+        setTimeout(resolve, seconds * 1000)
+    })
+}
+
+wait(2)
+    .then(() => {
+        console.log('I waited for 2 seconds')
+        return wait(1)
+    })
+    .then(() => {
+        console.log('I waited for 1 second')
+        return wait(3)
+    })
+    .then(() => {
+        console.log('I waited for 3 seconds')
+    })
+    .catch(err => console.warn(err))
+
+// Imediately resolve or reject using Promise static methods (same as above)
+Promise.resolve('resolved').then(x => console.log(x));
+Promise.reject('rejected').catch(x => console.error(x))

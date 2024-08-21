@@ -34,7 +34,6 @@ const whereAmI = function (lat, lng) {
       return res.json()
     })
     .then(data => {
-
       console.log(`You are in ${data.city}`)
       console.log(data)
     }).catch((e) => {
