@@ -1,7 +1,6 @@
 // noinspection JSDeprecatedSymbols
 
 'use strict';
-
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
@@ -236,7 +235,7 @@ const wait = function (seconds) {
 
 wait(2)
     .then(() => {
-        console.log('I waited for 2 seconds')
+        // console.log('I waited for 2 seconds')
         return wait(1)
     })
     .then(() => {
@@ -244,10 +243,53 @@ wait(2)
         return wait(3)
     })
     .then(() => {
-        console.log('I waited for 3 seconds')
+        // console.log('I waited for 3 seconds')
     })
     .catch(err => console.warn(err))
 
 // Imediately resolve or reject using Promise static methods (same as above)
 Promise.resolve('resolved').then(x => console.log(x));
 Promise.reject('rejected').catch(x => console.error(x))
+
+
+/*
+    ! S16 | EP 261: Promisify GeoLocation API
+*/
+
+
+const getPosition = function () {
+    return new Promise(function (resolve, reject) {
+        // option 1: explicit
+        navigator.geolocation.getCurrentPosition(
+            position => resolve(position),
+            err => reject(err)
+        )
+        // option 2: implicit
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+    })
+}
+getPosition().then(pos => console.log(pos))
+
+
+const whereAmI = function () {
+
+    const { latt: lat, longt: lng } = getPosition().then(pos => {
+        // console.log(pos.coords)
+        return fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
+    })
+        .then(res => {
+            if (!res.ok) {
+                console.warn(`Error with status code: ${res.status}`)
+            }
+            return res.json()
+        })
+        .then(data => {
+            if (!data.standard.countryname) throw new Error('No data available')
+            console.log(`You are in ${data.standard.countryname}`)
+
+        }).catch((e) => {
+            console.error(e.message)
+        })
+}
+
+btn.addEventListener('click', whereAmI);
