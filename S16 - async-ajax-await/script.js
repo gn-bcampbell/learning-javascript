@@ -320,3 +320,31 @@ const asyncWhereAmI = async function (country) {
 }
 
 asyncWhereAmI('republic of ireland')
+
+/*
+    ! S16 | EP 266: Running Promises in parallel
+*/
+
+const get3Countries = async function (c1, c2, c3) {
+    try {
+        //  * This loads the promises in sequence (blocking) - so it takes longer.
+        // const [data1] = await getJson(`https://restcountries.com/v3.1/name/${c1}`)
+        // const [data2] = await getJson(`https://restcountries.com/v3.1/name/${c2}`)
+        // const [data3] = await getJson(`https://restcountries.com/v3.1/name/${c3}`)
+        // console.log(...[data1.capital, data2.capital, data3.capital]);
+
+        // * This is in parallel so is not blocking / waiting for the previous one to finish
+        const data = await Promise.all([
+            await getJson(`https://restcountries.com/v3.1/name/${c1}`),
+            await getJson(`https://restcountries.com/v3.1/name/${c2}`),
+            await getJson(`https://restcountries.com/v3.1/name/${c3}`),
+        ])
+
+        console.log(data.map(d => d[0].capital))
+
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+get3Countries('portugal', 'canada', 'republic of ireland')
