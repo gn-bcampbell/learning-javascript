@@ -293,3 +293,30 @@ const whereAmI = function () {
 }
 
 btn.addEventListener('click', whereAmI);
+
+
+/*
+    ! S16 | EP 263 : Consuming Promises with Async/Await
+
+    await returns a promise
+    async/await is syntactic sugar over .then() method
+*/
+
+const asyncWhereAmI = async function (country) {
+
+    // * await stops code function until a promise has resolved/rejected
+    const res = await fetch(`https://restcountries.com/v3.1/name/${country}`)
+    const data = await res.json()
+    console.log(res);
+    console.log(data)
+
+    // * exactly the same as
+    fetch(`https://restcountries.com/v3.1/name/${country}`)
+        .then(res => {
+            console.log(res)
+            return res.json()
+        })
+        .then(data => console.log(data))
+}
+
+asyncWhereAmI('republic of ireland')
