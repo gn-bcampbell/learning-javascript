@@ -334,6 +334,7 @@ const get3Countries = async function (c1, c2, c3) {
         // console.log(...[data1.capital, data2.capital, data3.capital]);
 
         // * This is in parallel so is not blocking / waiting for the previous one to finish
+        // * Short-circuts 
         const data = await Promise.all([
             await getJson(`https://restcountries.com/v3.1/name/${c1}`),
             await getJson(`https://restcountries.com/v3.1/name/${c2}`),
@@ -343,8 +344,48 @@ const get3Countries = async function (c1, c2, c3) {
         console.log(data.map(d => d[0].capital))
 
     } catch (err) {
-        console.error(err)
+        console.error(err.message)
     }
 }
 
 get3Countries('portugal', 'canada', 'republic of ireland')
+
+/*
+    ! S16 | EP 267: Other Promise Combinators
+    - race: first one that resolves is returned as 'resolved'
+    - allSettled
+    - any
+*/
+
+const racePromise = async function () {
+    const res = await Promise.race([
+        await getJson(`https://restcountries.com/v3.1/name/egypt`),
+        await getJson(`https://restcountries.com/v3.1/name/italy`),
+        await getJson(`https://restcountries.com/v3.1/name/france`),
+    ])
+    console.log(res[0])
+};
+
+racePromise()
+
+// * Returns array of all settled promises (rejected or not)
+const allSettledPromise = async function () {
+    Promise.allSettled([
+        Promise.resolve('success'),
+        Promise.resolve('success'),
+        Promise.reject('ERROR')
+    ]).then(res => console.log(res))
+};
+
+allSettledPromise()
+
+// * Returns first fulfilled promise (rejected are ignored)
+const anyPromise = async function () {
+    Promise.any([
+        Promise.resolve('ANY Success'),
+        Promise.resolve('success'),
+        Promise.reject('ERROR')
+    ]).then(res => console.log(res))
+};
+
+anyPromise()
