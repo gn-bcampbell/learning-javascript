@@ -11,5 +11,5 @@
 - [x] Section 11: Working with Arrays
 - [x] Section 13: Advanced DOM and Events
 - [x] Section 14: Object-Oriented Programming with JavaScript
-- [ ] Section 16: Asynchronous JavaScript: Promises, Async/Await, and AJAX
+- [x] Section 16: Asynchronous JavaScript: Promises, Async/Await, and AJAX
 - [ ] Section 17: Modern JavaScript Development: Modules, Tooling and Functional
